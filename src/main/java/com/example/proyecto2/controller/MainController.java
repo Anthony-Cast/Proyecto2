@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
@@ -14,12 +15,13 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 @Controller
+@RequestMapping("/user")
 public class MainController {
 
     @Autowired
     MedicionRepository medicionRepository;
 
-    @GetMapping("/index")
+    @GetMapping("")
     public String bienvenida(){
 
         return "index.html";
