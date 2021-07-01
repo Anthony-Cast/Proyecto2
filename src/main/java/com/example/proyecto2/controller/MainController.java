@@ -38,6 +38,4 @@ public class MainController {
         spo2Repository.save(valorspo2);
         return "monitoreo.html";
     }
-
-
 }
