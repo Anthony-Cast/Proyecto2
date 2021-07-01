@@ -50,11 +50,10 @@
     document.getElementById("valorSP").value = data;
     if(document.getElementById("flag").innerHTML === "2"){
       console.log("AHORA SI");
-      document.getElementById("botonGET").click();
+      document.getElementById("registrar").click();
     }else{
       document.getElementById("flag").innerHTML = "2";
     }
-    //document.getElementById("registrar").click();
   });
 </script>
 
@@ -69,13 +68,13 @@
 <main>
   <form method="post" th:action="@{/registrar}">
     <div class="col-md-4">
-      <div class="row"><h2 class="row" style="color: #002752">%SpO2:</h2></div>
+      <div class="row">
+        <h2 class="row" style="color: #002752">%SpO2:</h2><input class="form-control" type="text" id="valorSP" name="valorSP">
+      </div>
       <h2 id="flag" style="display:none">0</h2>
       <button type="submit" style="display:none" id="registrar">Registrar</button>
     </div>
   </form>
-  <input class="form-control" type="hidden" id="valorSP" name="valorSP">
-  <a class="button" id="botonGET" th:href="@{/registrarGet}">GET</a>
 </main>
 <footer>
   Copyright © 2016 Café JavaJam<br>
