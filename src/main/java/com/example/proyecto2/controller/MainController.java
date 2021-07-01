@@ -21,12 +21,16 @@ public class MainController {
 
     @GetMapping("/index")
     public String bienvenida(){
+
         return "index.html";
+
     }
 
     @GetMapping("/monitoreo")
     public String monitoreo(){
+
         return "monitoreo.html";
+
     }
 
     @PostMapping("/registrar")
