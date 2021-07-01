@@ -5,15 +5,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequestMapping("/user")
 public class MainController {
 
     @Autowired
     Spo2Repository spo2Repository;
 
-    @GetMapping("/index")
+    @GetMapping("")
     public String bienvenida(){
         return "index.html";
     }
