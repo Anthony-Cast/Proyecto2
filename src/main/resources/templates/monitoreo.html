@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Café JavaJam</title>
+  <meta charset="utf-8">
+  <style>
+    body{font-family:Verdana,Arial,sans-serif;
+      background-color:#FCEBB6;
+      margin-left: auto;
+      margin-right: auto;
+      width:42%;}
+    header{background-color:#D2B48C;
+      text-align: center}
+    footer{background-color:#D2B48C;
+      font-style:italic;
+      font-size: 13px;
+      text-align: center;}
+    nav{font-weight: bold;
+      word-spacing: 8px;
+      text-align: center;}
+  </style>
+</head>
+<body>
+
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyDxnoily8MtyE_EbrCrOatA0u0yOjf9yk4",
+    authDomain: "netpulse-9e137.firebaseapp.com",
+    databaseURL: "https://netpulse-9e137-default-rtdb.firebaseio.com",
+    projectId: "netpulse-9e137",
+    storageBucket: "netpulse-9e137.appspot.com",
+    messagingSenderId: "855387244557",
+    appId: "1:855387244557:web:ab3e1ccfbabebcc07d2d44"
+  };
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+
+
+<script>
+  var lecturaSPO2 = firebase.database().ref('Pulsioximetro/' + 'id/' + '1/' + 'Probando/' + 'spo2');
+
+  lecturaSPO2.on('value', (snapshot) => {
+    const data = snapshot.val();
+    console.log(data);
+    document.getElementById("valorSP").innerHTML = data;
+    document.getElementById("valorSP").value = data;
+    if(document.getElementById("flag").innerHTML === "2"){
+      console.log("AHORA SI");
+      document.getElementById("botonGET").click();
+    }else{
+      document.getElementById("flag").innerHTML = "2";
+    }
+    //document.getElementById("registrar").click();
+  });
+</script>
+
+<header class="row">
+</header>
+<nav>
+  <a href="accueil.html">Accueil</a>
+  <a href="menu.html">Menu</a>
+  <a href="musique.html">Musique</a>
+  <a href="carrieres.html">Carrières</a>
+</nav>
+<main>
+  <form method="post" th:action="@{/registrar}">
+    <div class="col-md-4">
+      <div class="row"><h2 class="row" style="color: #002752">%SpO2:</h2></div>
+      <h2 id="flag" style="display:none">0</h2>
+      <button type="submit" style="display:none" id="registrar">Registrar</button>
+    </div>
+  </form>
+  <input class="form-control" type="hidden" id="valorSP" name="valorSP">
+  <a class="button" id="botonGET" th:href="@{/registrarGet}">GET</a>
+</main>
+<footer>
+  Copyright © 2016 Café JavaJam<br>
+  <a href="mailto:yourfirstname@yourlastname.com">yourfistname@yourlastname.com</a>
+</footer>
+</body>
+
+</html>
