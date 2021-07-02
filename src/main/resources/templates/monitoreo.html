@@ -76,6 +76,7 @@
     console.log(data);
     document.getElementById("valorSP").innerHTML = data;
     document.getElementById("valorSP").value = data;
+    document.getElementById("valor1spo2").value = data;
     if(document.getElementById("flag").innerHTML === "2"){
       console.log("AHORA SI");
       document.getElementById("registrar").click();
@@ -150,7 +151,8 @@
         <div class="text-contant">
           <form class="center" method="post" th:action="@{/netpulse/registrarspo2}">
               <div class="row">
-                <h2 class="row" style="color: #002752">%SpO2:</h2><input class="form-control" type="text" id="valorSP" name="valorSP">
+                <h1 th:text="${session.usuarioLogueado.nombre}"></h1>
+                <h2 class="row" style="color: #002752">Monitoreo %SpO2:</h2><input class="form-control" type="text" id="valorSP" name="valorSP">
               </div>
               <h2 id="flag" style="display:none">0</h2>
               <button type="submit" style="display:none" id="registrar">Registrar</button>
@@ -163,34 +165,34 @@
   <!-- end container -->
   <div class="container">
     <div class="row" >
-        <div id="bpm-display-container" style="display: inline-block">
-          <div id="bpm-display">
-            <output id="bpm-value" title="Heart rate"></output>
-            <label>bpm</label>
+        <div class="bpm-display-container" style="display: inline-block">
+          <div class="bpm-display">
+            <output id="valor1spo2" class="bpm-value" title="Heart rate"></output>
+            <label>%SpO2</label>
           </div>
         </div>
-        <div id="bpm-display-container" style="display: inline-block">
-          <div id="bpm-display">
-            <output id="bpm-value" title="Heart rate"></output>
-            <label>bpm</label>
+        <div class="bpm-display-container" style="display: inline-block">
+          <div class="bpm-display">
+            <output class="bpm-value" title="Heart rate">96</output>
+            <label>%SpO2</label>
           </div>
         </div>
-      <div id="bpm-display-container" style="display: inline-block">
-        <div id="bpm-display">
-          <output id="bpm-value" title="Heart rate"></output>
-          <label>bpm</label>
+      <div class="bpm-display-container" style="display: inline-block">
+        <div class="bpm-display">
+          <output class="bpm-value" title="Heart rate">96</output>
+          <label>%SpO2</label>
         </div>
       </div>
-      <div id="bpm-display-container" style="display: inline-block">
-        <div id="bpm-display">
-          <output id="bpm-value" title="Heart rate"></output>
-          <label>bpm</label>
+      <div class="bpm-display-container" style="display: inline-block">
+        <div class="bpm-display">
+          <output class="bpm-value" title="Heart rate">94</output>
+          <label>%SpO2</label>
         </div>
       </div>
-      <div id="bpm-display-container" style="display: inline-block">
-        <div id="bpm-display">
-          <output id="bpm-value" title="Heart rate"></output>
-          <label>bpm</label>
+      <div class="bpm-display-container" style="display: inline-block">
+        <div class="bpm-display">
+          <output class="bpm-value" title="Heart rate">98</output>
+          <label>%SpO2</label>
         </div>
       </div>
     </div>
