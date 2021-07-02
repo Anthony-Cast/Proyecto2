@@ -1,30 +1,61 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Café JavaJam</title>
+  <title>Monitoreo SPO2</title>
   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+  <!-- Site Metas -->
+  <title>Monitoreo SPO2</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- Site Icons -->
+  <link rel="shortcut icon" href="/images/fevicon.ico.png" type="images/x-icon" />
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <!-- Site CSS -->
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <!-- Colors CSS -->
+  <link rel="stylesheet" th:href="@{/css/colors.css}">
+  <!-- ALL VERSION CSS -->
+  <link rel="stylesheet" th:href="@{/css/versions.css}">
+  <!-- Responsive CSS -->
+  <link rel="stylesheet" th:href="@{/css/responsive.css}">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" th:href="@{/css/custom.css}">
+  <link rel="stylesheet" type="text/css" href="/css/styleBPM.css" id="style">
+  <script th:src="@{/js/main.js}"></script>
+  <!-- Modernizer for Portfolio -->
+  <script th:src="@{/js/modernizer.js}"></script>
+  <!-- [if lt IE 9] -->
   <style>
-    body{font-family:Verdana,Arial,sans-serif;
-      background-color:#FCEBB6;
-      margin-left: auto;
-      margin-right: auto;
-      width:42%;}
-    header{background-color:#D2B48C;
-      text-align: center}
-    footer{background-color:#D2B48C;
-      font-style:italic;
-      font-size: 13px;
-      text-align: center;}
-    nav{font-weight: bold;
-      word-spacing: 8px;
-      text-align: center;}
+    :root {
+      /* Variables for both color schemes */
+      --transition-duration: 0.2s;
+      --border-radius-small: 6px;
+      --border-radius-medium: 10px;
+      --border-radius-large: 15px;
+    }
+
+    :root {
+      --page-background: #fcfcfc;
+      --page-color: #ddd;
+      --text-color-muted: #000000;
+      --graph-background: transparent;
+      --graph-color: #1198c1;
+      --backdrop-background: rgba(252, 251, 251, 0.3);
+      --nav-item-background: #fdfafa;
+    }
   </style>
 </head>
-<body>
+<body class="clinic_version">
 
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
-
 <script>
   var firebaseConfig = {
     apiKey: "AIzaSyDxnoily8MtyE_EbrCrOatA0u0yOjf9yk4",
@@ -37,9 +68,6 @@
   };
   firebase.initializeApp(firebaseConfig);
 </script>
-
-
-
 <script>
   var lecturaSPO2 = firebase.database().ref('Pulsioximetro/' + 'id/' + '1/' + 'Probando/' + 'spo2');
 
@@ -58,31 +86,216 @@
   });
 </script>
 
-<header class="row">
-</header>
-<nav>
-  <a href="accueil.html">Accueil</a>
-  <a href="menu.html">Menu</a>
-  <a href="musique.html">Musique</a>
-  <a href="carrieres.html">Carrières</a>
-</nav>
-<main>
-  <form method="post" th:action="@{/user/registrar}">
-    <div class="col-md-4">
-      <div class="row">
-        <h2 class="row" style="color: #002752">%SpO2:</h2><input class="form-control" type="text" id="valorSP" name="valorSP">
+<header>
+  <div class="header-top wow fadeIn">
+    <div class="container">
+      <a class="navbar-brand" href="index.html"><img src="/images/netpulselogo.png" alt=#></a>
+      <div class="right-header">
+        <div class="header-info">
+          <div class="info-inner">
+            <span class="icontop"><img src="/images/phone-icon.png" alt="#"></span>
+            <span class="iconcont"><a href="tel:800 123 456">800 123 456</a></span>
+          </div>
+          <div class="info-inner">
+            <span class="icontop"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+            <span class="iconcont"><a data-scroll href="mailto:info@yoursite.com">info@Lifecare.com</a></span>
+          </div>
+          <div class="info-inner">
+            <span class="icontop"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+            <span class="iconcont"><a data-scroll href="#">Daily: 7:00am - 8:00pm</a></span>
+          </div>
+        </div>
       </div>
-      <h2 id="flag" style="display:none">0</h2>
-      <button type="submit" style="display:none" id="registrar">Registrar</button>
     </div>
-  </form>
-  <input class="form-control" type="hidden" id="valorSP" name="valorSP">
-  <a class="button" id="botonGET" th:href="@{/user/registrarGet}">GET</a>
-</main>
+  </div>
+  <div class="header-bottom wow fadeIn">
+    <div class="container">
+      <nav class="main-menu">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i class="fa fa-bars" aria-hidden="true"></i></button>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a class="active" th:href="@{/netpulse}">Home</a></li>
+            <li><a data-scroll href="#about">About us</a></li>
+            <li><a data-scroll href="#service">Services</a></li>
+            <li><a data-scroll href="#price">Price</a></li>
+            <li><a data-scroll href="#testimonials">Testimonials</a></li>
+            <li><a data-scroll href="#getintouch">Contact</a></li>
+            <li><a data-scroll th:href="@{/netpulse/monitoreospo2}">SPO2 </a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="serch-bar">
+        <div id="custom-search-input">
+          <div class="input-group col-md-12">
+            <input type="text" class="form-control input-lg" placeholder="Search" />
+            <span class="input-group-btn">
+              <button class="btn btn-info btn-lg" type="button">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div id="home" class="parallax first-section wow fadeIn">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <div class="text-contant">
+          <form class="center" method="post" th:action="@{/netpulse/registrarspo2}">
+              <div class="row">
+                <h2 class="row" style="color: #002752">%SpO2:</h2><input class="form-control" type="text" id="valorSP" name="valorSP">
+              </div>
+              <h2 id="flag" style="display:none">0</h2>
+              <button type="submit" style="display:none" id="registrar">Registrar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- end row -->
+  </div>
+  <!-- end container -->
+  <div class="container">
+    <div class="row" >
+        <div id="bpm-display-container" style="display: inline-block">
+          <div id="bpm-display">
+            <output id="bpm-value" title="Heart rate"></output>
+            <label>bpm</label>
+          </div>
+        </div>
+        <div id="bpm-display-container" style="display: inline-block">
+          <div id="bpm-display">
+            <output id="bpm-value" title="Heart rate"></output>
+            <label>bpm</label>
+          </div>
+        </div>
+      <div id="bpm-display-container" style="display: inline-block">
+        <div id="bpm-display">
+          <output id="bpm-value" title="Heart rate"></output>
+          <label>bpm</label>
+        </div>
+      </div>
+      <div id="bpm-display-container" style="display: inline-block">
+        <div id="bpm-display">
+          <output id="bpm-value" title="Heart rate"></output>
+          <label>bpm</label>
+        </div>
+      </div>
+      <div id="bpm-display-container" style="display: inline-block">
+        <div id="bpm-display">
+          <output id="bpm-value" title="Heart rate"></output>
+          <label>bpm</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <footer>
   Copyright © 2016 Café JavaJam<br>
   <a href="mailto:yourfirstname@yourlastname.com">yourfistname@yourlastname.com</a>
 </footer>
+
+<script>
+  function openModal(name) {
+    document
+            .querySelector(`.modal[data-name='${name}']`)
+            .classList.add("open");
+  }
+
+  function setupNav() {
+    document
+            .querySelector("button.menu-toggle")
+            .addEventListener("click", () => {
+              document
+                      .querySelector("nav.menu")
+                      .classList.toggle("open");
+            });
+    document.querySelectorAll("nav a").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        document
+                .querySelector("nav.menu")
+                .classList.toggle("open");
+
+        const modalName = event.target.getAttribute(
+                "data-modal-name"
+        );
+        openModal(modalName);
+      });
+    });
+  }
+
+  function setupModals() {
+    document.querySelectorAll(".modal").forEach((modal) => {
+      modal.addEventListener("click", (event) => {
+        if (event.originalTarget === modal) {
+          modal.classList.remove("open");
+        }
+      });
+      modal
+              .querySelector("button.close")
+              .addEventListener("click", () => {
+                modal.classList.remove("open");
+              });
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    setupNav();
+    setupModals();
+
+    // Allow setting various flags and options via the hash fragment
+    const hash = location.hash.length
+            ? location.hash.substring(1)
+            : "";
+    const flags = hash.split(",");
+
+    // Debug mode
+    if (flags.includes("debug")) {
+      // Force refreshing CSS in debug mode
+      const style = document.getElementById("style");
+      style.setAttribute(
+              "href",
+              style.getAttribute("href") + "?" + Date.now()
+      );
+
+      document.querySelector(".debug-menu-item").style.display =
+              "block";
+    }
+
+    // Initialize the heart rate monitor
+    const bpmElement = document.getElementById("bpm-value");
+    heartRateMonitor.initialize({
+      videoElement: document.getElementById("camera-feed"),
+      samplingCanvas: document.getElementById("sampling-canvas"),
+      graphCanvas: document.getElementById("graph-canvas"),
+      graphColor: getComputedStyle(
+              document.documentElement
+      ).getPropertyValue("--graph-color"),
+      graphWidth: 6,
+      onBpmChange: (bpm) => (bpmElement.innerText = bpm),
+    });
+
+    document
+            .getElementById("bpm-display-container")
+            .addEventListener(
+                    "click",
+                    heartRateMonitor.toggleMonitoring
+            );
+
+    document.documentElement.addEventListener("keyup", (event) => {
+      if (event.key === " ") {
+        heartRateMonitor.toggleMonitoring();
+      }
+    });
+  });
+</script>
 </body>
 
 </html>
