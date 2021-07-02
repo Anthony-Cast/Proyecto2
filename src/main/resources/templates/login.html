@@ -71,10 +71,10 @@
                 <form class="main_formy" method="post" th:action="@{/processLogin}" style="align-self: center">
                   <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                      <input class="form-control" placeholder="Correo" type="text" name="username">
+                      <input class="form-control" placeholder="Correo" type="text" id = "username" name="username">
                     </div>
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                      <input class="form-control" placeholder="Contraseña" type="password" name="password">
+                      <input class="form-control" placeholder="Contraseña" type="password" id="password" name="password">
                     </div>
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                       <a th:href="@{/correoconfirmar}">Olvidé mi contraseña</a>
