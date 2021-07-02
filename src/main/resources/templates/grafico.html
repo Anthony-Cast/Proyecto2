@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+</head>
+<body>
+
+
+<figure class="highcharts-figure">
+    <div id="listaMediciones" th:text="${listaMediciones}" style="display: none"></div>
+    <div id="listaFecha" th:text="${listaFecha}" style="display: none"></div>
+    <div id="grafica"></div>
+    <p id="texto" class="highcharts-description">
+        This demo shows how plot bands can be used on an axis to
+        highlight regions of a chart. In this example, the plot
+        bands are used to separate the wind speeds on the Y-axis
+        into categories.
+    </p>
+</figure>
+
+<script>
+    var listaMediciones=document.getElementById("listaMediciones").innerText;
+    var listaFecha=document.getElementById("listaFecha").innerText;
+    console.log(listaMediciones);
+    console.log(listaFecha);
+    var mediciones=listaMediciones.split("[")[1].split("]")[0].split(",");
+    var fechas=listaFecha.split("[")[1].split("]")[0].split(",");
+    var medicionesInt=[mediciones.length];
+    var fechasDate=[fechas.length];
+    var data=[mediciones.length];
+    for(var i=0;i<mediciones.length;i++){
+        medicionesInt[i]=parseInt(mediciones[i]);
+        fechasDate[i]=Date(fechas[i]);
+        data[i]=[fechasDate[i],medicionesInt[i]];
+    }
+    console.log(medicionesInt);
+    console.log(fechasDate);
+    console.log(data);
+    Highcharts.chart('grafica', {
+        chart: {
+            type: 'spline',
+            scrollablePlotArea: {
+                minWidth: 600,
+                scrollPositionX: 1
+            }
+        },
+        title: {
+            text: 'Wind speed during two days',
+            align: 'left'
+        },
+        subtitle: {
+            text: '13th & 14th of February, 2018 at two locations in Vik i Sogn, Norway',
+            align: 'left'
+        },
+        xAxis: {
+            type: 'datetime',
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Wind speed (m/s)'
+            },
+            minorGridLineWidth: 0,
+            gridLineWidth: 0,
+            alternateGridColor: null,
+            plotBands: [{ // Light air
+                from: 0.3,
+                to: 1.5,
+                color: 'rgba(68, 170, 213, 0.1)',
+                label: {
+                    text: 'Light air',
+                    style: {
+                        color: '#606060'
+                    }
+                }
+            }, { // Light breeze
+                from: 1.5,
+                to: 3.3,
+                color: 'rgba(0, 0, 0, 0)',
+                label: {
+                    text: 'Light breeze',
+                    style: {
+                        color: '#606060'
+                    }
+                }
+            }, { // Gentle breeze
+                from: 3.3,
+                to: 5.5,
+                color: 'rgba(68, 170, 213, 0.1)',
+                label: {
+                    text: 'Gentle breeze',
+                    style: {
+                        color: '#606060'
+                    }
+                }
+            }, { // Moderate breeze
+                from: 5.5,
+                to: 8,
+                color: 'rgba(0, 0, 0, 0)',
+                label: {
+                    text: 'Moderate breeze',
+                    style: {
+                        color: '#606060'
+                    }
+                }
+            }, { // Fresh breeze
+                from: 8,
+                to: 11,
+                color: 'rgba(68, 170, 213, 0.1)',
+                label: {
+                    text: 'Fresh breeze',
+                    style: {
+                        color: '#606060'
+                    }
+                }
+            }, { // Strong breeze
+                from: 11,
+                to: 14,
+                color: 'rgba(0, 0, 0, 0)',
+                label: {
+                    text: 'Strong breeze',
+                    style: {
+                        color: '#606060'
+                    }
+                }
+            }, { // High wind
+                from: 14,
+                to: 15,
+                color: 'rgba(68, 170, 213, 0.1)',
+                label: {
+                    text: 'High wind',
+                    style: {
+                        color: '#606060'
+                    }
+                }
+            }]
+        },
+        tooltip: {
+            valueSuffix: ' m/s'
+        },
+        plotOptions: {
+            spline: {
+                lineWidth: 4,
+                states: {
+                    hover: {
+                        lineWidth: 5
+                    }
+                },
+                marker: {
+                    enabled: false
+                }
+            }
+        },
+        series: [{
+            name: 'Hestavollane',
+            data: data
+        }],
+        navigation: {
+            menuItemStyle: {
+                fontSize: '10px'
+            }
+        }
+    });
+</script>
+</body>
+</html>
