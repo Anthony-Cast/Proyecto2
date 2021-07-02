@@ -8,11 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+
 
 @Controller
 @RequestMapping("/user")
@@ -44,6 +42,6 @@ public class MainController {
         medicion.setIdoximetro(2);
         medicion.setValorspo2(spo2obtenido);
         medicionRepository.save(medicion);
-        return "redirect:/monitoreo";
+        return "redirect:/user/monitoreo";
     }
 }
