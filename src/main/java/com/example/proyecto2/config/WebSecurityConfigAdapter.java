@@ -5,11 +5,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.sql.DataSource;
+
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfigAdapter extends org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter {
+public class WebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
     @Autowired
     DataSource dataSource;
 
@@ -18,18 +21,24 @@ public class WebSecurityConfigAdapter extends org.springframework.security.confi
         httpSecurity.formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/processLogin") // for the POST request of the login form
-                .defaultSuccessUrl("/login",true);
-        httpSecurity.authorizeRequests()
-                .antMatchers("/user","/user/**").authenticated();
+                .defaultSuccessUrl("/redirectByRol",true);
+
         httpSecurity.logout()
                 .logoutSuccessUrl("/login")
                 .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true);
+
+        httpSecurity.authorizeRequests()
+                .antMatchers("/user","/user/**").hasAuthority("admin")
+                .antMatchers("/login", "/login/**").permitAll()
+                .anyRequest().permitAll();
     }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
-                .usersByUsernameQuery("select usuario, contrasenia from usuarios WHERE usuario =?");
+                .passwordEncoder(new BCryptPasswordEncoder())
+                .usersByUsernameQuery("select u.usuario, u.contrasenia, u.cuenta from usuarios u WHERE u.usuario =?")
+                .authoritiesByUsernameQuery("select u.usuario, u.rol from usuarios u where u.usuario=? and u.cuenta != -1");
     }
 }
