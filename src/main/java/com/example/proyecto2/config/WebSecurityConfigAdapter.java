@@ -30,6 +30,6 @@ public class WebSecurityConfigAdapter extends org.springframework.security.confi
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
-                .usersByUsernameQuery("select usuario, contrasenia from usuarios WHERE usuario =?");
+                .usersByUsernameQuery("select usuario, contrasenia,idcliente from usuarios WHERE usuario =?");
     }
 }
