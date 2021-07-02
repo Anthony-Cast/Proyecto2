@@ -38,6 +38,13 @@ public class MainController {
 
     }
 
+    @GetMapping("/prueba")
+    public String prueba(){
+
+        return "prueba.html";
+
+    }
+
     @PostMapping("/registrar")
     public String registrar(@RequestParam(name = "valorSP") Integer spo2obtenido) {
         Medicion medicion = new Medicion();
