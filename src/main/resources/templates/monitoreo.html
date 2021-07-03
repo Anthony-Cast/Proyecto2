@@ -1,58 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>Monitoreo SPO2</title>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <!-- Mobile Metas -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-  <!-- Site Metas -->
-  <title>Monitoreo SPO2</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <!-- Site Icons -->
-  <link rel="shortcut icon" href="/images/fevicon.ico.png" type="images/x-icon" />
-  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-  <!-- Site CSS -->
-  <link rel="stylesheet" th:href="@{/css/style.css}">
-  <!-- Colors CSS -->
-  <link rel="stylesheet" th:href="@{/css/colors.css}">
-  <!-- ALL VERSION CSS -->
-  <link rel="stylesheet" th:href="@{/css/versions.css}">
-  <!-- Responsive CSS -->
-  <link rel="stylesheet" th:href="@{/css/responsive.css}">
-  <!-- Custom CSS -->
-  <link rel="stylesheet" th:href="@{/css/custom.css}">
-  <link rel="stylesheet" type="text/css" href="/css/styleBPM.css" id="style">
-  <script th:src="@{/js/main.js}"></script>
-  <!-- Modernizer for Portfolio -->
-  <script th:src="@{/js/modernizer.js}"></script>
-  <!-- [if lt IE 9] -->
-  <style>
-    :root {
-      /* Variables for both color schemes */
-      --transition-duration: 0.2s;
-      --border-radius-small: 6px;
-      --border-radius-medium: 10px;
-      --border-radius-large: 15px;
-    }
+<head th:replace="fragments/indexfragment.html :: header( title = 'Monitoreo SpO2')"></head>
+<style>
+  :root {
+    /* Variables for both color schemes */
+    --transition-duration: 0.2s;
+    --border-radius-small: 6px;
+    --border-radius-medium: 10px;
+    --border-radius-large: 15px;
+  }
 
-    :root {
-      --page-background: #fcfcfc;
-      --page-color: #ddd;
-      --text-color-muted: #000000;
-      --graph-background: transparent;
-      --graph-color: #1198c1;
-      --backdrop-background: rgba(252, 251, 251, 0.3);
-      --nav-item-background: #fdfafa;
-    }
-  </style>
-</head>
+  :root {
+    --page-background: #fcfcfc;
+    --page-color: #ddd;
+    --text-color-muted: #000000;
+    --graph-background: transparent;
+    --graph-color: #1198c1;
+    --backdrop-background: rgba(10, 4, 4, 0.95);
+    --nav-item-background: #fdfafa;
+  }
+</style>
 <body class="clinic_version">
+<!-- END LOADER -->
+<header>
+  <div th:replace="fragments/indexfragment.html :: navbar"></div>
+  <div th:replace="fragments/indexfragment.html :: navbar2"></div>
+</header>
 
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
