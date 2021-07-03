@@ -23,7 +23,13 @@
         into categories.
     </p>
 </figure>
+<script>
+    function dateUTC(fecha) {
+        var datos=fecha.trim().split(" ");
+        return datos[0]+"T"+datos[1];
 
+    }
+</script>
 <script>
     var listaMediciones=document.getElementById("listaMediciones").innerText;
     var listaFecha=document.getElementById("listaFecha").innerText;
@@ -31,12 +37,13 @@
     console.log(listaFecha);
     var mediciones=listaMediciones.split("[")[1].split("]")[0].split(",");
     var fechas=listaFecha.split("[")[1].split("]")[0].split(",");
+    console.log(fechas);
     var medicionesInt=[mediciones.length];
     var fechasDate=[fechas.length];
     var data=[mediciones.length];
     for(var i=0;i<mediciones.length;i++){
         medicionesInt[i]=parseInt(mediciones[i]);
-        fechasDate[i]=Date(fechas[i]);
+        fechasDate[i]=dateUTC(fechas[i]);
         data[i]=[fechasDate[i],medicionesInt[i]];
     }
     console.log(medicionesInt);
@@ -156,7 +163,9 @@
                 },
                 marker: {
                     enabled: false
-                }
+                },
+                pointInterval: 3600000*24, // one hour
+                pointStart: Date.UTC(2021, 5, 30, 15, 50, 0)
             }
         },
         series: [{
