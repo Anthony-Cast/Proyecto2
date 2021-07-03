@@ -1244,7 +1244,7 @@ hr.invis1 {
     width: 100%;
     height: 100%;
     position: relative;
-    background: url("uploads/code.jpg") no-repeat;
+
 }
 
 .design-wrapper {
@@ -1265,7 +1265,6 @@ hr.invis1 {
     position: relative;
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
-    background: url("uploads/design.jpg") no-repeat;
 }
 
 
@@ -1828,7 +1827,6 @@ select.mobile-device {
     font-weight: 400;
     font-size: 20px;
     text-transform: capitalize;
-    line-height: !important;
 }
 
 .footer {
@@ -2063,7 +2061,7 @@ select.mobile-device {
     color: #999 !important;
     margin: 0 !important;
     padding: 0 !important;
-    line-height: 1 !important:
+    line-height: 1 !important
 }
 
 .stat-wrap p {
@@ -2072,7 +2070,7 @@ select.mobile-device {
     margin: 0;
     font-weight: 300;
     padding: 4px 0 0;
-    line-height: 1 !important:
+    line-height: 1 !important
 }
 
 #preloader {
