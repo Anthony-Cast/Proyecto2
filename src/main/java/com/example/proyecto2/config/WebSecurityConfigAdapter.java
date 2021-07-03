@@ -29,7 +29,8 @@ public class WebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true);
 
         httpSecurity.authorizeRequests()
-                .antMatchers("/user","/user/**").hasAuthority("admin")
+                .antMatchers("/netpulse/monitoreospo2/**").hasAuthority("admin")
+                .antMatchers("/netpulse").permitAll()
                 .antMatchers("/login", "/login/**").permitAll()
                 .anyRequest().permitAll();
     }

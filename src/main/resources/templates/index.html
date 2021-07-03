@@ -12,8 +12,8 @@
    <meta name="description" content="">
    <meta name="author" content="">
    <!-- Site Icons -->
-   <link rel="shortcut icon" href="images/fevicon.ico.png" type="images/x-icon" />
-   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+   <link rel="shortcut icon" href="/images/fevicon.ico.png" type="images/x-icon" />
+   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
    <!-- Bootstrap CSS -->
    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
    <!-- Site CSS -->
@@ -39,7 +39,7 @@
       <header>
          <div class="header-top wow fadeIn">
             <div class="container">
-               <a class="navbar-brand" href="index.html"><img src="/images/logo.png" alt="image"></a>
+               <a class="navbar-brand" href="index.html"><img src="/images/netpulselogo.png" alt=#></a>
                <div class="right-header">
                   <div class="header-info">
                      <div class="info-inner">
@@ -67,14 +67,13 @@
 				  
                   <div id="navbar" class="navbar-collapse collapse">
                      <ul class="nav navbar-nav">
-                        <li><a class="active" href="index.html">Home</a></li>
+                        <li><a class="active" th:href="@{/netpulse}">Home</a></li>
                         <li><a data-scroll href="#about">About us</a></li>
                         <li><a data-scroll href="#service">Services</a></li>
-                        <li><a data-scroll href="#doctors">Doctors</a></li>
                         <li><a data-scroll href="#price">Price</a></li>
 						<li><a data-scroll href="#testimonials">Testimonials</a></li>
                         <li><a data-scroll href="#getintouch">Contact</a></li>
-                        <li><a data-scroll th:href="@{/user/monitoreo}">Monitorear SPO2 </a></li>
+                        <li><a data-scroll th:href="@{/netpulse/monitoreospo2}">SPO2 </a></li>
                      </ul>
                   </div>
                </nav>
@@ -345,78 +344,6 @@
             </div>
          </div>
       </div>
-      <!-- end section -->
-	  
-	  <!-- doctor -->
-	  
-	  <div id="doctors" class="parallax section db" data-stellar-background-ratio="0.4" style="background:#fff;" data-scroll-id="doctors" tabindex="-1">
-        <div class="container">
-		
-		<div class="heading">
-               <span class="icon-logo"><img src="/images/icon-logo.png" alt="#"></span>
-               <h2>The Specialist Clinic</h2>
-            </div>
-
-            <div class="row dev-list text-center">
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.2s; animation-name: fadeIn;">
-                    <div class="widget clearfix">
-                        <img src="/images/doctor_01.jpg" alt="" class="img-responsive img-rounded">
-                        <div class="widget-title">
-                            <h3>Soren Bo Bostian</h3>
-                            <small>Clinic Owner</small>
-                        </div>
-                        <!-- end title -->
-                        <p>Hello guys, I am Soren from Sirbistana. I am senior art director and founder of Violetta.</p>
-
-                        <div class="footer-social">
-                            <a href="#" class="btn grd1"><i class="fa fa-facebook"></i></a>
-                            <a href="#" class="btn grd1"><i class="fa fa-github"></i></a>
-                            <a href="#" class="btn grd1"><i class="fa fa-twitter"></i></a>
-                            <a href="#" class="btn grd1"><i class="fa fa-linkedin"></i></a>
-                        </div>
-                    </div><!--widget -->
-                </div><!-- end col -->
-
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.4s; animation-name: fadeIn;">
-                    <div class="widget clearfix">
-                        <img src="/images/doctor_02.jpg" alt="" class="img-responsive img-rounded">
-                        <div class="widget-title">
-                            <h3>Bryan Saftler</h3>
-                            <small>Internal Diseases</small>
-                        </div>
-                        <!-- end title -->
-                        <p>Hello guys, I am Soren from Sirbistana. I am senior art director and founder of Violetta.</p>
-
-                        <div class="footer-social">
-                            <a href="#" class="btn grd1"><i class="fa fa-facebook"></i></a>
-                            <a href="#" class="btn grd1"><i class="fa fa-github"></i></a>
-                            <a href="#" class="btn grd1"><i class="fa fa-twitter"></i></a>
-                            <a href="#" class="btn grd1"><i class="fa fa-linkedin"></i></a>
-                        </div>
-                    </div><!--widget -->
-                </div><!-- end col -->
-
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 wow fadeIn">
-                    <div class="widget clearfix">
-                        <img src="/images/doctor_03.jpg" alt="" class="img-responsive img-rounded">
-                        <div class="widget-title">
-                            <h3>Matthew Bayliss</h3>
-                            <small>Orthopedics Expert</small>
-                        </div>
-                        <!-- end title -->
-                        <p>Hello guys, I am Soren from Sirbistana. I am senior art director and founder of Violetta.</p>
-
-                        <div class="footer-social">
-                            <a href="#" class="btn grd1"><i class="fa fa-facebook"></i></a>
-                            <a href="#" class="btn grd1"><i class="fa fa-github"></i></a>
-                            <a href="#" class="btn grd1"><i class="fa fa-twitter"></i></a>
-                            <a href="#" class="btn grd1"><i class="fa fa-linkedin"></i></a>
-                        </div>
-                    </div><!--widget -->
-                </div><!-- end col -->
-
-            </div><!-- end row -->
-        </div><!-- end container -->
     </div>
 	  
 	  <div id="price" class="section pr wow fadeIn" style="background-image:url('../static/images/price-bg.png');">

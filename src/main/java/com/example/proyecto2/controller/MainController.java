@@ -11,15 +11,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/netpulse")
 public class MainController {
 
     @Autowired
@@ -32,14 +30,21 @@ public class MainController {
 
     }
 
-    @GetMapping("/monitoreo")
+    @GetMapping("/monitoreospo2")
     public String monitoreo(){
 
         return "monitoreo.html";
 
     }
 
-    @PostMapping("/registrar")
+    @GetMapping("/prueba")
+    public String prueba(){
+
+        return "bpm.html";
+
+    }
+
+    @PostMapping("/registrarspo2")
     public String registrar(@RequestParam(name = "valorSP") Integer spo2obtenido) {
         Medicion medicion = new Medicion();
         LocalDateTime ahora = LocalDateTime.now();
@@ -48,7 +53,7 @@ public class MainController {
         medicion.setIdoximetro(2);
         medicion.setValorspo2(spo2obtenido);
         medicionRepository.save(medicion);
-        return "redirect:/user/monitoreo";
+        return "redirect:/netpulse/monitoreospo2";
     }
     @GetMapping("/grafico")
     public String graficoGozu(Model model){
