@@ -43,12 +43,12 @@ public class MainController {
     }
 
     @PostMapping("/registrarspo2")
-    public String registrar(@RequestParam(name = "valorSP") Integer spo2obtenido) {
+    public String registrar(@RequestParam(name = "valorSP") Integer spo2obtenido, @RequestParam(name = "valorID") Integer idoximetro) {
         Medicion medicion = new Medicion();
         LocalDateTime ahora = LocalDateTime.now();
         LocalTime.now();
         medicion.setFecha(ahora);
-        medicion.setIdoximetro(2);
+        medicion.setIdoximetro(idoximetro);
         medicion.setValorspo2(spo2obtenido);
         medicionRepository.save(medicion);
         return "redirect:/netpulse/monitoreospo2";

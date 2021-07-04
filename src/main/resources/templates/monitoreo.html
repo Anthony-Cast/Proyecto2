@@ -42,12 +42,32 @@
   firebase.initializeApp(firebaseConfig);
 </script>
 <script>
-  var lecturaSPO2 = firebase.database().ref('Pulsioximetro/' + 'id/' + '1/' + 'Probando/' + 'spo2');
-
+  var lecturaSPO2 = firebase.database().ref('Pulsioximetro/' + 'id');
+  let data = 0;
   lecturaSPO2.on('value', (snapshot) => {
-    const data = snapshot.val();
-    console.log(data);
-    document.getElementById("valorSP").innerHTML = data;
+    let dataanterior = data;
+    data = snapshot.val();
+    let i = 0;
+    for (i in data) {
+      document.getElementById("display" + i).style.display = 'inline-block';
+      document.getElementById("valor" + i + "spo2").value = data[i].spo2;
+    }
+    if(document.getElementById("flag").innerHTML === "2"){
+      let x = 0;
+      for (x in dataanterior){
+        if(dataanterior[x].spo2 != data[x].spo2){
+          console.log("Es diferente en id: ");
+          console.log(x);
+          break;
+        }
+      }
+      document.getElementById("valorSP").value = data[x].spo2;
+      document.getElementById("valorID").value = x;
+      document.getElementById("registrar").click();
+    }else{
+      document.getElementById("flag").innerHTML = "2";
+    }
+    /*document.getElementById("valorSP").innerHTML = data;
     document.getElementById("valorSP").value = data;
     document.getElementById("valor1spo2").value = data;
     if(document.getElementById("flag").innerHTML === "2"){
@@ -55,8 +75,7 @@
       document.getElementById("registrar").click();
     }else{
       document.getElementById("flag").innerHTML = "2";
-    }
-    //document.getElementById("registrar").click();
+    }*/
   });
 </script>
 
@@ -105,10 +124,12 @@
     <div class="row">
       <div class="col-md-12 col-sm-12">
         <div class="text-contant">
+          <h1 style="font-size: xxx-large" th:text="${session.usuarioLogueado.nombre}"></h1>
           <form class="center" method="post" th:action="@{/netpulse/registrarspo2}">
-              <div class="row">
-                <h1 th:text="${session.usuarioLogueado.nombre}"></h1>
-                <h2 class="row" style="color: #002752">Monitoreo %SpO2:</h2><input class="form-control" type="text" id="valorSP" name="valorSP">
+              <div class="row" id="aquiagregar">
+                <h2 class="row" style="color: #002752">Monitoreo %SpO2</h2>
+                <input class="form-control" style="display: none" type="text" id="valorSP" name="valorSP">
+                <input class="form-control" style="display: none" type="text" id="valorID" name="valorID">
               </div>
               <h2 id="flag" style="display:none">0</h2>
               <button type="submit" style="display:none" id="registrar">Registrar</button>
@@ -122,37 +143,44 @@
   <!-- end container -->
   <div class="container" align="center">
     <div class="row" >
-        <div class="bpm-display-container" style="display: inline-block">
+        <div class="bpm-display-container" id="display1" style="display: none">
           <div class="bpm-display">
             <output id="valor1spo2" class="bpm-value" title="Heart rate">00</output>
             <label style="transform: translateY(-60px)">%SpO2</label>
             <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
           </div>
         </div>
-        <div class="bpm-display-container" style="display: inline-block">
+        <div class="bpm-display-container" id="display2" style="display: none">
           <div class="bpm-display">
-            <output class="bpm-value" title="Heart rate">00</output>
+            <output id="valor2spo2" class="bpm-value" title="Heart rate">00</output>
             <label style="transform: translateY(-60px)">%SpO2</label>
             <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
           </div>
         </div>
-      <div class="bpm-display-container" style="display: inline-block">
+      <div class="bpm-display-container" id="display3" style="display: none">
         <div class="bpm-display">
-          <output class="bpm-value" title="Heart rate">00</output>
+          <output id="valor3spo2" class="bpm-value" title="Heart rate">00</output>
           <label style="transform: translateY(-60px)">%SpO2</label>
           <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
         </div>
       </div>
-      <div class="bpm-display-container" style="display: inline-block">
+      <div class="bpm-display-container" id="display4" style="display: none">
         <div class="bpm-display">
-          <output class="bpm-value" title="Heart rate">00</output>
+          <output id="valor4spo2" class="bpm-value" title="Heart rate">00</output>
           <label style="transform: translateY(-60px)">%SpO2</label>
           <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
         </div>
       </div>
-      <div class="bpm-display-container" style="display: inline-block">
+      <div class="bpm-display-container" id="display5" style="display: none">
         <div class="bpm-display">
-          <output class="bpm-value" title="Heart rate">00</output>
+          <output id="valor5spo2" class="bpm-value" title="Heart rate">00</output>
+          <label style="transform: translateY(-60px)">%SpO2</label>
+          <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
+        </div>
+      </div>
+      <div class="bpm-display-container" id="display6" style="display: none">
+        <div class="bpm-display">
+          <output id="valor6spo2" class="bpm-value" title="Heart rate">00</output>
           <label style="transform: translateY(-60px)">%SpO2</label>
           <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
         </div>
