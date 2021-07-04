@@ -16,7 +16,7 @@ public class LoginController {
     @Autowired
     UsuarioRepository usuarioRepository;
 
-    @GetMapping("/netpulse/login")
+    @GetMapping("/login")
     public String loginForm(){
 
         return "login.html";
@@ -43,7 +43,7 @@ public class LoginController {
             return "redirect:/netpulse";
         }else{
             System.out.println(rol);
-            return "/netpulse/login";
+            return "/login";
         }
     }
 

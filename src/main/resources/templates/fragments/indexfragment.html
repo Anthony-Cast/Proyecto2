@@ -82,7 +82,7 @@
             <li><a data-scroll th:href="@{'/netpulse#testimonials'}">Testimonials</a></li>
             <li><a data-scroll th:href="@{'/netpulse#getintouch'}">Contact</a></li>
             <li><a data-scroll th:href="@{/netpulse/monitoreospo2}">SPO2 </a></li>
-            <li sec:authorize="isAnonymous()"><a data-scroll th:href="@{/netpulse/login}">Inicio Sesion</a></li>
+            <li sec:authorize="isAnonymous()"><a data-scroll th:href="@{/login}">Inicio Sesion</a></li>
             <li sec:authorize="isAuthenticated()"><a>Cerrar sesion
               <form style="opacity: 0" th:action="@{/logout}" method="post">
               <button style="height: 50px;position: absolute;transform: translateY(-40px)" type="submit" >Cerrar Sesión</button>

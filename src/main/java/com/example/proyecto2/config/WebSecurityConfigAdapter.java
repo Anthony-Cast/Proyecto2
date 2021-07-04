@@ -24,7 +24,7 @@ public class WebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/redirectByRol",true);
 
         httpSecurity.logout()
-                .logoutSuccessUrl("/netpulse/login")
+                .logoutSuccessUrl("/netpulse")
                 .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true);
 
