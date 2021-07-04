@@ -25,7 +25,6 @@ public class MainController {
 
     @GetMapping("")
     public String bienvenida(){
-
         return "index.html";
 
     }
@@ -39,7 +38,6 @@ public class MainController {
 
     @GetMapping("/prueba")
     public String prueba(){
-
         return "bpm.html";
 
     }
