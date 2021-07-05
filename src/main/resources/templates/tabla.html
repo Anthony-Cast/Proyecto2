@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/indexfragment.html :: header( title = 'Monitoreo SpO2')">
+
+</head>
+
+<body class="clinic_version">
+<header>
+    <div th:replace="fragments/indexfragment.html :: navbar"></div>
+    <div th:replace="fragments/indexfragment.html :: navbar2"></div>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="text-contant">
+                <br><br><br><br><br><br>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>#Oxímetro</th>
+                        <th>Paciente</th>
+                        <th>Activo</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="dato,index:${datosTabla}">
+                        <td th:text="${index.index +1}"></td>
+                        <td th:text="${dato.getPaciente()}"></td>
+                        <td th:if="${dato.getActivo()==1}" th:text="Activo"></td>
+                        <td th:unless="${dato.getActivo()==1}" th:text="Inactivo"></td>
+                        <td><a th:href="@{/netpulse}"><button style="background: #1b6d85" class="btn btn-light btn-radius btn-brd grd1 effect-1" type="submit">Editar</button></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

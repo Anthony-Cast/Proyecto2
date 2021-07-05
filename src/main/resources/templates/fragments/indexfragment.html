@@ -83,6 +83,8 @@
             <li><a data-scroll id="iddoctors" th:href="@{'/netpulse#doctors'}">Equipo</a></li>
             <li><a data-scroll id="idcontact" th:href="@{'/netpulse#getintouch'}">Contáctanos</a></li>
             <li><a data-scroll id="idspo2" th:href="@{/netpulse/monitoreospo2}">Monitoreo SPO2</a></li>
+            <li sec:authorize="isAuthenticated()"><a data-scroll id="oximetro" th:href="@{/netpulse/oximetros}">Oxímetros</a></li>
+            <li sec:authorize="isAnonymous()"><a data-scroll id="incio" th:href="@{/login}">Inciar sesión</a></li>
             <li sec:authorize="isAuthenticated()"><a>Cerrar sesion
               <form style="opacity: 0" th:action="@{/logout}" method="post">
               <button style="height: 50px;position: absolute;transform: translateY(-40px)" type="submit" >Cerrar Sesión</button>

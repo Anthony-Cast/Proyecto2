@@ -1,11 +1,13 @@
 package com.example.proyecto2.controller;
 
 import com.example.proyecto2.dto.MedicionDto;
+import com.example.proyecto2.dto.OximetrosDTO;
 import com.example.proyecto2.dto.PacienteDTO;
 import com.example.proyecto2.entity.Medicion;
 import com.example.proyecto2.entity.Usuario;
 import com.example.proyecto2.repository.MedicionRepository;
 import com.example.proyecto2.repository.OximetroRepository;
+import com.example.proyecto2.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +30,8 @@ public class MainController {
     MedicionRepository medicionRepository;
     @Autowired
     OximetroRepository oximetroRepository;
+    @Autowired
+    UsuarioRepository usuarioRepository;
 
     @GetMapping("")
     public String bienvenida(){
@@ -129,4 +133,11 @@ public class MainController {
         return "grafico";
     }
 
+    @GetMapping("/oximetros")
+    public String tablaOximetros(HttpSession session,Model model){
+        Usuario usuariologueado = (Usuario) session.getAttribute("usuarioLogueado");
+        List<OximetrosDTO> tablaInfo=usuarioRepository.buscarOximetroTabla(usuariologueado.getIdcliente());
+        model.addAttribute("datosTabla",tablaInfo);
+     return "tabla";
+    }
 }
