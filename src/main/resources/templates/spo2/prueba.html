@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-</head>
-<body>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
 
+<head th:replace="fragments/indexfragment.html :: header( title = 'Monitoreo SpO2')">
+
+</head>
+
+<body class="clinic_version">
+<header>
+    <div th:replace="fragments/indexfragment.html :: navbar"></div>
+    <div th:replace="fragments/indexfragment.html :: navbar2"></div>
+</header>
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
 <script>
@@ -43,29 +46,37 @@
     </div>
     <!-- end row -->
 </div>
-
-<div style="float-displace: auto">
-    <select id="valorspo2-lista" style="display: none">
-        <option th:each="spo2:${listaMediciones}"
-                th:text="${spo2.getFechamedicion()}"
-                th:value="${spo2.getValorspo2()}">
-        </option>
-    </select>
-    <select id="dias-lista">
-        <option value="default">Elige tu opción</option>
-        <option th:each="dia:${listaDias}"
-                th:text="${dia}"
-                th:value="${dia}">
-        </option>
-    </select>
-    <div>
-        <canvas id="myChart"></canvas>
+<div id="home" class="parallax first-section wow fadeIn">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="text-contant">
+                    <select id="valorspo2-lista" style="display: none">
+                        <option th:each="spo2:${listaMediciones}"
+                                th:text="${spo2.getFechamedicion()}"
+                                th:value="${spo2.getValorspo2()}">
+                        </option>
+                    </select>
+                    <select id="dias-lista">
+                        <option value="default">Elige tu opción</option>
+                        <option th:each="dia:${listaDias}"
+                                th:text="${dia}"
+                                th:value="${dia}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="width: 1400px; height: 700px">
+        <canvas id="myChart" width="1400px" height="700px"></canvas>
     </div>
 </div>
+<div>
 
+</div>
 <script>
     let myChart;
-
     $("#dias-lista").change(function (){
         var ctx = document.getElementById('myChart').getContext('2d');
         var diaelegido=document.getElementById("dias-lista").value;
@@ -111,7 +122,6 @@
             });
         }
         else {
-
             if (myChart) {
                 myChart.destroy();
             }
@@ -143,6 +153,12 @@
         }else{
             document.getElementById("flag").innerHTML = "2";
         }
+    });
+</script>
+<script>
+    $(document).ready(function(){
+        $("#idhome").removeClass();
+        $("#idspo2").addClass("active");
     });
 </script>
 </body>

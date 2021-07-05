@@ -31,6 +31,8 @@
   <script th:src="@{/js/main.js}"></script>
   <!-- Modernizer for Portfolio -->
   <script th:src="@{/js/modernizer.js}"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- [if lt IE 9] -->
 </head>
 
@@ -43,10 +45,10 @@
     <script th:src="@{/js/all.js}"></script>
     <!-- all plugins -->
     <script th:src="@{/js/custom.js}"></script>
-    <!-- LOADER -->
+    <!-- LOADER
     <div id="preloader">
       <img class="preloader" src="/images/loaders/heart-loading2.gif" alt="">
-    </div>
+    </div>-->
     <div class="container">
       <a class="navbar-brand" th:href="@{/netpulse}"><img src="/images/netpulselogo.png" alt=#></a>
       <div class="right-header">
@@ -75,13 +77,13 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a class="active" th:href="@{/netpulse}">Home</a></li>
-            <li><a data-scroll th:href="@{'/netpulse#about'}">About us</a></li>
-            <li><a data-scroll th:href="@{'/netpulse#service'}">Services</a></li>
-            <li><a data-scroll th:href="@{'/netpulse#price'}">Price</a></li>
-            <li><a data-scroll th:href="@{'/netpulse#testimonials'}">Testimonials</a></li>
-            <li><a data-scroll th:href="@{'/netpulse#getintouch'}">Contact</a></li>
-            <li><a data-scroll th:href="@{/netpulse/monitoreospo2}">SPO2 </a></li>
+            <li><a class="active" data-scroll id="idhome" th:href="@{/netpulse}">Home</a></li>
+            <li><a data-scroll id="idaboutus" th:href="@{'/netpulse#about'}">About us</a></li>
+            <li><a data-scroll id="idservices" th:href="@{'/netpulse#service'}">Services</a></li>
+            <li><a data-scroll id="idprice" th:href="@{'/netpulse#price'}">Price</a></li>
+            <li><a data-scroll id="idtestimonials" th:href="@{'/netpulse#testimonials'}">Testimonials</a></li>
+            <li><a data-scroll id="idcontact" th:href="@{'/netpulse#getintouch'}">Contact</a></li>
+            <li><a data-scroll id="idspo2" th:href="@{/netpulse/monitoreospo2}">SPO2 </a></li>
             <li sec:authorize="isAuthenticated()"><a>Cerrar sesion
               <form style="opacity: 0" th:action="@{/logout}" method="post">
               <button style="height: 50px;position: absolute;transform: translateY(-40px)" type="submit" >Cerrar Sesión</button>
