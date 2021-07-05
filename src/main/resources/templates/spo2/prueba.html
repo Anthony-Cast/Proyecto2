@@ -22,31 +22,6 @@
     };
     firebase.initializeApp(firebaseConfig);
 </script>
-<script>
-    var lecturaSPO2 = firebase.database().ref('Pulsioximetro/' + 'id');
-    let data = 0;
-    lecturaSPO2.on('value', (snapshot) => {
-        let dataanterior = data;
-        data = snapshot.val();
-        if(document.getElementById("flag").innerHTML === "2"){
-            let x = 0;
-            for (x in dataanterior){
-                if(dataanterior[x].spo2 != data[x].spo2){
-                    console.log("Es diferente en id: ");
-                    console.log(x);
-                    break;
-                }
-            }
-            document.getElementById("valorSP").value = data[x].spo2;
-            document.getElementById("valorID").value = x;
-            document.getElementById("vengoDE").value = 20;
-            document.getElementById("registrar").click();
-        }else{
-            document.getElementById("flag").innerHTML = "2";
-        }
-    });
-</script>
-
 <div class="container" style="display: none">
     <div class="row">
         <div class="col-md-12 col-sm-12">
@@ -57,8 +32,10 @@
                         <input class="form-control" style="display: none" type="text" id="valorSP" name="valorSP">
                         <input class="form-control" style="display: none" type="text" id="valorID" name="valorID">
                         <input class="form-control" style="display: none" type="text" id="vengoDE" name="vengoDE">
+                        <input class="form-control" style="display: none" type="text" id="IDOximetro" name="IDOximetro" th:value="${IDOximetro}">
                     </div>
                     <h2 id="flag" style="display:none">0</h2>
+                    <h2 id="usuarioFirebase" style="display:none" th:text="${usuarioFirebase}"></h2>
                     <button type="submit" style="display:none" id="registrar">Registrar</button>
                 </form>
             </div>
@@ -216,6 +193,32 @@
         }
     });
 
+</script>
+<script>
+    var usuarioFire = 0;
+    usuarioFire = document.getElementById("usuarioFirebase").innerText;
+    var lecturaSPO2 = firebase.database().ref('Pulsioximetro/' + usuarioFire);
+    let data = 0;
+    lecturaSPO2.on('value', (snapshot) => {
+        let dataanterior = data;
+        data = snapshot.val();
+        if(document.getElementById("flag").innerHTML === "2"){
+            let x = 0;
+            for (x in dataanterior){
+                if(dataanterior[x].spo2 != data[x].spo2){
+                    console.log("Es diferente en id: ");
+                    console.log(x);
+                    break;
+                }
+            }
+            document.getElementById("valorSP").value = data[x].spo2;
+            document.getElementById("valorID").value = x;
+            document.getElementById("vengoDE").value = 20;
+            document.getElementById("registrar").click();
+        }else{
+            document.getElementById("flag").innerHTML = "2";
+        }
+    });
 </script>
 </body>
 </html>
