@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 
@@ -67,10 +68,17 @@
 </div>
 
 <div style="float-displace: auto">
-    <select id="valorspo2-lista">
+    <select id="valorspo2-lista" style="display: none">
         <option th:each="spo2:${listaMediciones}"
                 th:text="${spo2.getFechamedicion()}"
                 th:value="${spo2.getValorspo2()}">
+        </option>
+    </select>
+    <select id="dias-lista">
+        <option value="logo">Elige tu opción</option>
+        <option th:each="dia:${listaDias}"
+                th:text="${dia}"
+                th:value="${dia}">
         </option>
     </select>
     <div>
@@ -79,43 +87,135 @@
 </div>
 
 <script>
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var listaMediciones=document.getElementById("valorspo2-lista");
-    let i = 0;
-    console.log(listaMediciones.length);
-    let dataSPO2= [listaMediciones.length];
-    let dataFecha=[listaMediciones.length];
-    for( i ;i<listaMediciones.length;i++){
-        dataSPO2[i] = listaMediciones[i].value;
-        dataFecha[i] = listaMediciones[i].text;
-    }
-    //console.log(dataSPO2);
-    //console.log(dataFecha);
-    var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: dataFecha,
-            datasets: [{
-                label: '%SpO2',
-                data: dataSPO2,
-                tension: 0.3,
-                backgroundColor: [
-                    'rgb(50,151,196,1)',
-                ],
-                borderColor: [
-                    'rgba(61,182,198,0.95)',
-                ],
-                borderWidth: 5
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-
+    let myChart;
+    var lista=document.getElementById("dias-lista").value;
+    console.log(lista);
+    if(lista=="logo") {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var listaMediciones = document.getElementById("valorspo2-lista");
+        let i = 0;
+        console.log(listaMediciones.length);
+        var dataSPO2 = [listaMediciones.length];
+        var dataFecha = [listaMediciones.length];
+        for (i; i < listaMediciones.length; i++) {
+            dataSPO2[i] = listaMediciones[i].value;
+            dataFecha[i] = listaMediciones[i].text;
+        }
+        //console.log(dataSPO2);
+        //console.log(dataFecha);
+        if (myChart) {
+            myChart.destroy();
+        }
+        myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: dataFecha,
+                datasets: [{
+                    label: '%SpO2',
+                    data: dataSPO2,
+                    tension: 0.3,
+                    backgroundColor: [
+                        'rgb(50,151,196,1)',
+                    ],
+                    borderColor: [
+                        'rgba(61,182,198,0.95)',
+                    ],
+                    borderWidth: 5
+                }]
+            },
+            options: {
+                scales: {
+                    y: {}
                 }
             }
+        });
+    }
+    $("#dias-lista").change(function (){
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var diaelegido=document.getElementById("dias-lista").value;
+        console.log(diaelegido);
+        if(lista=="logo") {
+            var listaMediciones = document.getElementById("valorspo2-lista");
+            console.log(listaMediciones.length);
+            var dataSPO2 = [];
+            var dataFecha = [];
+            var cont = 0;
+            for (var i = 0; i < listaMediciones.length; i++) {
+                if (listaMediciones[i].text.split(" ")[0] == diaelegido) {
+                    dataFecha[cont] = listaMediciones[i].text.split(" ")[1].split(".")[0];
+                    dataSPO2[cont] = listaMediciones[i].value;
+                    cont++;
+                }
+            }
+            if (myChart) {
+                myChart.destroy();
+            }
+            myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dataFecha,
+                    datasets: [{
+                        label: '%SpO2',
+                        data: dataSPO2,
+                        tension: 0.3,
+                        backgroundColor: [
+                            'rgb(50,151,196,1)',
+                        ],
+                        borderColor: [
+                            'rgba(61,182,198,0.95)',
+                        ],
+                        borderWidth: 5
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {}
+                    }
+                }
+            });
+        }
+        else {
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var listaMediciones = document.getElementById("valorspo2-lista");
+            let i = 0;
+            console.log(listaMediciones.length);
+            var dataSPO2 = [listaMediciones.length];
+            var dataFecha = [listaMediciones.length];
+            for (i; i < listaMediciones.length; i++) {
+                dataSPO2[i] = listaMediciones[i].value;
+                dataFecha[i] = listaMediciones[i].text;
+            }
+            //console.log(dataSPO2);
+            //console.log(dataFecha);
+            if (myChart) {
+                myChart.destroy();
+            }
+            myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dataFecha,
+                    datasets: [{
+                        label: '%SpO2',
+                        data: dataSPO2,
+                        tension: 0.3,
+                        backgroundColor: [
+                            'rgb(50,151,196,1)',
+                        ],
+                        borderColor: [
+                            'rgba(61,182,198,0.95)',
+                        ],
+                        borderWidth: 5
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {}
+                    }
+                }
+            });
         }
     });
+
 </script>
 </body>
 </html>

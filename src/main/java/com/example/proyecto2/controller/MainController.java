@@ -57,11 +57,13 @@ public class MainController {
         int minimoIdOximetrosUsuario = oximetroRepository.menorIdOximetrosdelUsuario(idcliente);
         System.out.println(minimoIdOximetrosUsuario);
         int idoximetroCorrespondiente = (minimoIdOximetrosUsuario + idoximetro - 1);
+        List<String> listDias = medicionRepository.listMedicionxDia(idoximetroCorrespondiente);
         System.out.println(idoximetroCorrespondiente);
         List<MedicionDto> listaValoresSpo2yFechaPorIdOxi = medicionRepository.listaMedicionesyFechasPorIdOximetro(idoximetroCorrespondiente);
         //List<Integer> listaMedicionesPorOximetro = medicionRepository.listaMedicionesPorIdOximetro(idoximetroCorrespondiente);
         //List<Date> listaFecha = medicionRepository.listaFechaPorIdOximetro(idoximetroCorrespondiente);
         model.addAttribute("listaMediciones",listaValoresSpo2yFechaPorIdOxi);
+        model.addAttribute("listaDias",listDias);
         return "spo2/prueba";
 
     }
