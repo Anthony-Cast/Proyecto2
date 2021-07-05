@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/indexfragment.html :: header( title = 'Monitoreo SpO2')">
+<head th:replace="fragments/indexfragment.html :: header( title = 'Tabla de Oxímetros')">
 
 </head>
 
@@ -30,7 +30,7 @@
                         <td th:text="${dato.getPaciente()}"></td>
                         <td th:if="${dato.getActivo()==1}" th:text="Activo"></td>
                         <td th:unless="${dato.getActivo()==1}" th:text="Inactivo"></td>
-                        <td><a th:href="@{'/netpulse/editar?id='${dato.getIdoximetro()}}"><button style="background: #1b6d85" class="btn btn-light btn-radius btn-brd grd1 effect-1" type="submit">Editar</button></a></td>
+                        <td><a th:href="@{'/netpulse/editar?id='+${dato.getIdoximetro()}}"><button style="background: #1b6d85" class="btn btn-light btn-radius btn-brd grd1 effect-1" type="submit">Editar</button></a></td>
                     </tr>
                     </tbody>
                 </table>

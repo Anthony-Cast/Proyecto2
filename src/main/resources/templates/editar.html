@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/indexfragment.html :: header( title = 'Editar Oxímetro')">
+
+</head>
+
+<body class="clinic_version">
+<header>
+  <div th:replace="fragments/indexfragment.html :: navbar"></div>
+  <div th:replace="fragments/indexfragment.html :: navbar2"></div>
+</header>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <div class="text-contant">
+        <form style="margin-top: 200px"  method="post" th:action="@{/netpulse/save}" th:object="${oximetro}">
+          <input type="hidden" name="idoximetro"  th:value="*{idoximetro}" />
+          <input type="hidden" name="usuarios_idcliente" th:value="*{usuario}">
+          <input type="hidden" name="valor" id="valor" th:value="${oximetro.activo}">
+          <div class="row">
+            <div class="form-group col-6">
+              <label style="transform: translateX(-425px)" for="paciente">Paciente</label>
+              <input th:field="*{paciente}" type="text" class="form-control" name="paciente" id="paciente">
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="form-group col-6">
+              <label style="transform: translateX(-435px)">Activo</label>
+              <select  id="select" class="form-control">
+                <option th:field="*{activo}" th:selected="${oximetro.activo == 0}" value="0">Inactivo</option>
+                <option th:field="*{activo}" th:selected="${oximetro.activo==1}" value="1">Activo</option>
+              </select>
+            </div>
+          </div>
+          <div style="transform: translateX(-370px);margin-top: 20px">
+            <a style="margin-right: 20px" th:href="@{/netpulse/oximetros}" class="btn btn-danger">Cancelar</a>
+            <button type="submit" class="btn btn-primary" th:text="${'Actualizar'}"></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<script>
+  $("select").change(function () {
+    var select= document.getElementById("select").value;
+    document.getElementById("valor").value=select;
+  });
+</script>
+</html>

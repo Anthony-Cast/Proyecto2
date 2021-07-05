@@ -20,5 +20,9 @@ public interface OximetroRepository extends JpaRepository<Oximetro,Integer> {
     Integer menorIdOximetrosdelUsuario (int idcliente);
     @Query(value="select paciente,activo from oximetros where usuarios_idcliente=?1",nativeQuery = true)
     List<PacienteDTO> buscarPacientes(int id);
+    @Query(value = "select o.*from usuarios u inner join oximetros o on u.idcliente = o.usuarios_idcliente\n" +
+            "where o.idoximetro=?1 and u.nombre = ?2",nativeQuery = true)
+    Oximetro buscarxIdAndNombre(int id, String nomnbre);
+
 
 }

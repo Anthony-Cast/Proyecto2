@@ -142,16 +142,27 @@ public class MainController {
      return "tabla";
     }
     @GetMapping("/editar")
-    public String editar(Model model, @RequestParam("id") int id, @ModelAttribute("oximetro")Oximetro oximetro){
-        Optional<Oximetro> oximetroOptional = oximetroRepository.findById(id);
-        if(oximetroOptional.isPresent()){
-            oximetro=oximetroOptional.get();
+    public String editar(HttpSession session,Model model, @RequestParam("id") int id, @ModelAttribute("oximetro")Oximetro oximetro){
+        Usuario usuariologueado = (Usuario) session.getAttribute("usuarioLogueado");
+        Oximetro oxi = oximetroRepository.buscarxIdAndNombre(id,usuariologueado.getNombre());
+        if(oxi.getIdoximetro()!=null){
+            oximetro=oxi;
             model.addAttribute("oximetro",oximetro);
+            System.out.println(oximetro.getActivo());
             return "editar";
         }
         else{
             model.addAttribute("mensaje","No hay pulsioxímetro asociado");
             return "redirect:/netpulse/oximetros";
         }
+    }
+
+    @PostMapping("/save")
+    public String guardar(@RequestParam("valor") int activo,HttpSession session,@ModelAttribute("oximetro") Oximetro oximetro){
+        Usuario usuariologueado = (Usuario) session.getAttribute("usuarioLogueado");
+        oximetro.setUsuario(usuariologueado);
+        oximetro.setActivo(activo);
+        oximetroRepository.save(oximetro);
+        return"redirect:/netpulse/oximetros";
     }
 }
