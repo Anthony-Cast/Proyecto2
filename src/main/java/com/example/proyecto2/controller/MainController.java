@@ -1,6 +1,7 @@
 package com.example.proyecto2.controller;
 
 import com.example.proyecto2.dto.MedicionDto;
+import com.example.proyecto2.dto.PacienteDTO;
 import com.example.proyecto2.entity.Medicion;
 import com.example.proyecto2.entity.Usuario;
 import com.example.proyecto2.repository.MedicionRepository;
@@ -37,9 +38,15 @@ public class MainController {
     @GetMapping("/monitoreospo2")
     public String monitoreo(Model model,HttpSession session){
         Usuario usuario=(Usuario) session.getAttribute("usuarioLogueado");
-        List<String> pacientes = oximetroRepository.buscarPacientes(usuario.getIdcliente());
+        List<PacienteDTO> pacientes = oximetroRepository.buscarPacientes(usuario.getIdcliente());
+        System.out.println(pacientes.size());
         for(int i=0;i< pacientes.size();i++){
-            model.addAttribute("Paciente"+(i+1),pacientes.get(i));
+            if(pacientes.get(i).getActivo()==1) {
+                model.addAttribute("Paciente" + (i + 1), pacientes.get(i).getPaciente());
+            }
+            else{
+                model.addAttribute("Paciente" + (i + 1), "");
+            }
         }
         model.addAttribute("usuarioFirebase", usuario.getUsuario());
         return "monitoreo";
