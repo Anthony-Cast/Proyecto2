@@ -70,6 +70,7 @@ public class MainController {
         model.addAttribute("IDOximetro", idoximetro);
         model.addAttribute("listaDias",listDias);
         model.addAttribute("promDias",promDias);
+        model.addAttribute("nombre",oximetroRepository.findById(idoximetroCorrespondiente).get().getPaciente());
         return "spo2/grafica";
 
     }

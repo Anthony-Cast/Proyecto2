@@ -39,4 +39,6 @@ public interface MedicionRepository extends JpaRepository<Medicion,Integer> {
             "group by date(fecha)",nativeQuery = true)
     List<MedicionDto> valoresMensuales(int id);
 
+
+
 }

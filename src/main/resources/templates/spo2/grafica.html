@@ -63,13 +63,16 @@
                                 th:value="${dias.getValorspo2()}">
                         </option>
                     </select>
-                    <select id="dias-lista">
-                        <option value="default">Elige tu opción</option>
-                        <option th:each="dia:${listaDias}"
-                                th:text="${dia}"
-                                th:value="${dia}">
-                        </option>
-                    </select>
+                    <div class="row">
+                        <p style="font-size: 30px">Evolución de los valores SPO2% del paciente: <br> <b><span style="font-size: 30px;" th:text="${nombre}"></span></b></p>
+                        <select style="width: 1000px;height: 50px" id="dias-lista">
+                            <option value="default">Promedio por día</option>
+                            <option th:each="dia:${listaDias}"
+                                    th:text="${dia}"
+                                    th:value="${dia}">
+                            </option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
