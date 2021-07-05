@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-md-12 col-sm-12">
             <div class="text-contant">
-                <br><br><br><br><br><br>
+                <h2 style="margin-top: 200px;font-size: xxx-large;text-align: justify;text-align: center" th:text="${nombre}"></h2>
                 <table class="table">
                     <thead>
                     <tr>
@@ -30,7 +30,7 @@
                         <td th:text="${dato.getPaciente()}"></td>
                         <td th:if="${dato.getActivo()==1}" th:text="Activo"></td>
                         <td th:unless="${dato.getActivo()==1}" th:text="Inactivo"></td>
-                        <td><a th:href="@{/netpulse}"><button style="background: #1b6d85" class="btn btn-light btn-radius btn-brd grd1 effect-1" type="submit">Editar</button></a></td>
+                        <td><a th:href="@{'/netpulse/editar?id='${dato.getIdoximetro()}}"><button style="background: #1b6d85" class="btn btn-light btn-radius btn-brd grd1 effect-1" type="submit">Editar</button></a></td>
                     </tr>
                     </tbody>
                 </table>

@@ -137,6 +137,8 @@ public class MainController {
     public String tablaOximetros(HttpSession session,Model model){
         Usuario usuariologueado = (Usuario) session.getAttribute("usuarioLogueado");
         List<OximetrosDTO> tablaInfo=usuarioRepository.buscarOximetroTabla(usuariologueado.getIdcliente());
+        String nombre="Oxímetros asociados de\n "+ usuariologueado.getNombre();
+        model.addAttribute("nombre",nombre);
         model.addAttribute("datosTabla",tablaInfo);
      return "tabla";
     }
