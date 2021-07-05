@@ -1,6 +1,8 @@
 package com.example.proyecto2.repository;
 
+import com.example.proyecto2.dto.MedicionDto;
 import com.example.proyecto2.entity.Medicion;
+import com.example.proyecto2.entity.Oximetro;
 import org.joda.time.DateTime;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,8 +15,19 @@ import java.util.List;
 
 @Repository
 public interface MedicionRepository extends JpaRepository<Medicion,Integer> {
+
     @Query(value="select valorspo2 from mediciones",nativeQuery = true)
     List<Integer> listaMediciones();
+
+    @Query(value="select m.valorspo2 from mediciones m where m.idoximetro = ?1 order by m.fecha asc",nativeQuery = true)
+    List<Integer> listaMedicionesPorIdOximetro(int idoximetro);
+
     @Query(value="select fecha from mediciones",nativeQuery = true)
     List<Date> listaFecha();
+
+    @Query(value="select m.fecha from mediciones m where m.idoximetro = ?1 order by m.fecha asc",nativeQuery = true)
+    List<Date> listaFechaPorIdOximetro(int idoximetro);
+
+    @Query(value="select m.valorspo2 as valorspo2, m.fecha as fechamedicion from mediciones m where m.idoximetro = ?1 order by m.fecha asc",nativeQuery = true)
+    List<MedicionDto> listaMedicionesyFechasPorIdOximetro(int idoximetrro);
 }
