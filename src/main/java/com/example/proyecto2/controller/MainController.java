@@ -35,7 +35,6 @@ public class MainController {
     public String monitoreo(){
 
         return "monitoreo.html";
-
     }
 
     @GetMapping("/prueba")
