@@ -111,7 +111,7 @@
         var ctx = document.getElementById('myChart').getContext('2d');
         var diaelegido=document.getElementById("dias-lista").value;
         console.log(diaelegido);
-        if(lista=="logo") {
+        if(diaelegido!="logo") {
             var listaMediciones = document.getElementById("valorspo2-lista");
             console.log(listaMediciones.length);
             var dataSPO2 = [];
@@ -154,7 +154,7 @@
         else {
             var ctx = document.getElementById('myChart').getContext('2d');
             var listaMediciones = document.getElementById("valorspo2-lista");
-            let i = 0;
+            var i = 0;
             console.log(listaMediciones.length);
             var dataSPO2 = [listaMediciones.length];
             var dataFecha = [listaMediciones.length];
