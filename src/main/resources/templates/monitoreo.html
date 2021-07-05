@@ -42,44 +42,6 @@
   };
   firebase.initializeApp(firebaseConfig);
 </script>
-<script>
-  var lecturaSPO2 = firebase.database().ref('Pulsioximetro/' + 'id');
-  let data = 0;
-  lecturaSPO2.on('value', (snapshot) => {
-    let dataanterior = data;
-    data = snapshot.val();
-    let i = 0;
-    for (i in data) {
-      document.getElementById("display" + i).style.display = 'inline-block';
-      document.getElementById("valor" + i + "spo2").value = data[i].spo2;
-    }
-    if(document.getElementById("flag").innerHTML === "2"){
-      let x = 0;
-      for (x in dataanterior){
-        if(dataanterior[x].spo2 != data[x].spo2){
-          console.log("Es diferente en id: ");
-          console.log(x);
-          break;
-        }
-      }
-      document.getElementById("valorSP").value = data[x].spo2;
-      document.getElementById("valorID").value = x;
-      document.getElementById("vengoDE").value = 10;
-      document.getElementById("registrar").click();
-    }else{
-      document.getElementById("flag").innerHTML = "2";
-    }
-    /*document.getElementById("valorSP").innerHTML = data;
-    document.getElementById("valorSP").value = data;
-    document.getElementById("valor1spo2").value = data;
-    if(document.getElementById("flag").innerHTML === "2"){
-      console.log("AHORA SI");
-      document.getElementById("registrar").click();
-    }else{
-      document.getElementById("flag").innerHTML = "2";
-    }*/
-  });
-</script>
 
 <header>
   <div class="header-top wow fadeIn">
@@ -140,6 +102,7 @@
                 <input class="form-control" style="display: none" type="text" id="vengoDE" name="vengoDE">
               </div>
               <h2 id="flag" style="display:none">0</h2>
+              <h2 id="usuarioFirebase" style="display:none" th:text="${usuarioFirebase}"></h2>
               <button type="submit" style="display:none" id="registrar">Registrar</button>
           </form>
         </div>
@@ -151,60 +114,97 @@
   <!-- end container -->
   <div class="container" align="center">
     <div class="row" >
-        <div class="bpm-display-container" id="display1" style="display: none">
-          <div class="bpm-display">
-            <output id="valor1spo2" class="bpm-value" title="Heart rate">00</output>
-            <label style="transform: translateY(-60px)">%SpO2</label>
-            <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente1}"></b></p>
-            <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
 
-          </div>
+      <div class="bpm-display-container" id="display1" style="display: none">
+        <div class="bpm-display">
+          <output id="valor1spo2" class="bpm-value" title="Heart rate">00</output>
+          <label style="transform: translateY(-60px)">%SpO2</label>
+          <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente1}"></b></p>
+          <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
         </div>
-        <div class="bpm-display-container" id="display2" style="display: none">
-          <div class="bpm-display">
-            <output id="valor2spo2" class="bpm-value" title="Heart rate">00</output>
-            <label style="transform: translateY(-60px)">%SpO2</label>
-            <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente2}"></b></p>
-            <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
+      </div>
 
-          </div>
+      <div class="bpm-display-container" id="display2" style="display: none">
+        <div class="bpm-display">
+          <output id="valor2spo2" class="bpm-value" title="Heart rate">00</output>
+          <label style="transform: translateY(-60px)">%SpO2</label>
+          <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente2}"></b></p>
+          <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
         </div>
+      </div>
+
       <div class="bpm-display-container" id="display3" style="display: none">
         <div class="bpm-display">
           <output id="valor3spo2" class="bpm-value" title="Heart rate">00</output>
           <label style="transform: translateY(-60px)">%SpO2</label>
           <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente3}"></b></p>
           <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
-
         </div>
       </div>
+
       <div class="bpm-display-container" id="display4" style="display: none">
         <div class="bpm-display">
           <output id="valor4spo2" class="bpm-value" title="Heart rate">00</output>
           <label style="transform: translateY(-60px)">%SpO2</label>
           <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente4}"></b></p>
           <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
-
         </div>
       </div>
+
       <div class="bpm-display-container" id="display5" style="display: none">
         <div class="bpm-display">
           <output id="valor5spo2" class="bpm-value" title="Heart rate">00</output>
           <label style="transform: translateY(-60px)">%SpO2</label>
           <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente5}"></b></p>
           <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
-
         </div>
       </div>
+
       <div class="bpm-display-container" id="display6" style="display: none">
         <div class="bpm-display">
           <output id="valor6spo2" class="bpm-value" title="Heart rate">00</output>
           <label style="transform: translateY(-60px)">%SpO2</label>
           <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente6}"></b></p>
           <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
-
         </div>
       </div>
+
+      <div class="bpm-display-container" id="display7" style="display: none">
+        <div class="bpm-display">
+          <output id="valor7spo2" class="bpm-value" title="Heart rate">00</output>
+          <label style="transform: translateY(-60px)">%SpO2</label>
+          <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente7}"></b></p>
+          <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
+        </div>
+      </div>
+
+      <div class="bpm-display-container" id="display8" style="display: none">
+        <div class="bpm-display">
+          <output id="valor8spo2" class="bpm-value" title="Heart rate">00</output>
+          <label style="transform: translateY(-60px)">%SpO2</label>
+          <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente8}"></b></p>
+          <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
+        </div>
+      </div>
+
+      <div class="bpm-display-container" id="display9" style="display: none">
+        <div class="bpm-display">
+          <output id="valor9spo2" class="bpm-value" title="Heart rate">00</output>
+          <label style="transform: translateY(-60px)">%SpO2</label>
+          <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente9}"></b></p>
+          <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
+        </div>
+      </div>
+
+      <div class="bpm-display-container" id="display10" style="display: none">
+        <div class="bpm-display">
+          <output id="valor10spo2" class="bpm-value" title="Heart rate">00</output>
+          <label style="transform: translateY(-60px)">%SpO2</label>
+          <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente10}"></b></p>
+          <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -212,100 +212,36 @@
   Copyright © 2016 Café JavaJam<br>
   <a href="mailto:yourfirstname@yourlastname.com">yourfistname@yourlastname.com</a>
 </footer>
-
 <script>
-  function openModal(name) {
-    document
-            .querySelector(`.modal[data-name='${name}']`)
-            .classList.add("open");
-  }
-
-  function setupNav() {
-    document
-            .querySelector("button.menu-toggle")
-            .addEventListener("click", () => {
-              document
-                      .querySelector("nav.menu")
-                      .classList.toggle("open");
-            });
-    document.querySelectorAll("nav a").forEach((link) => {
-      link.addEventListener("click", (event) => {
-        event.preventDefault();
-        document
-                .querySelector("nav.menu")
-                .classList.toggle("open");
-
-        const modalName = event.target.getAttribute(
-                "data-modal-name"
-        );
-        openModal(modalName);
-      });
-    });
-  }
-
-  function setupModals() {
-    document.querySelectorAll(".modal").forEach((modal) => {
-      modal.addEventListener("click", (event) => {
-        if (event.originalTarget === modal) {
-          modal.classList.remove("open");
-        }
-      });
-      modal
-              .querySelector("button.close")
-              .addEventListener("click", () => {
-                modal.classList.remove("open");
-              });
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    setupNav();
-    setupModals();
-
-    // Allow setting various flags and options via the hash fragment
-    const hash = location.hash.length
-            ? location.hash.substring(1)
-            : "";
-    const flags = hash.split(",");
-
-    // Debug mode
-    if (flags.includes("debug")) {
-      // Force refreshing CSS in debug mode
-      const style = document.getElementById("style");
-      style.setAttribute(
-              "href",
-              style.getAttribute("href") + "?" + Date.now()
-      );
-
-      document.querySelector(".debug-menu-item").style.display =
-              "block";
+  var usuarioFire = 0;
+  usuarioFire = document.getElementById("usuarioFirebase").innerText;
+  var lecturaSPO2 = firebase.database().ref('Pulsioximetro/' + usuarioFire);
+  let data = 0;
+  lecturaSPO2.on('value', (snapshot) => {
+    let dataanterior = data;
+    data = snapshot.val();
+    let i = 0;
+    for (i in data) {
+      document.getElementById("display" + i).style.display = 'inline-block';
+      document.getElementById("valor" + i + "spo2").value = data[i].spo2;
     }
-
-    // Initialize the heart rate monitor
-    const bpmElement = document.getElementById("bpm-value");
-    heartRateMonitor.initialize({
-      videoElement: document.getElementById("camera-feed"),
-      samplingCanvas: document.getElementById("sampling-canvas"),
-      graphCanvas: document.getElementById("graph-canvas"),
-      graphColor: getComputedStyle(
-              document.documentElement
-      ).getPropertyValue("--graph-color"),
-      graphWidth: 6,
-      onBpmChange: (bpm) => (bpmElement.innerText = bpm),
-    });
-
-    document
-            .getElementById("bpm-display-container")
-            .addEventListener(
-                    "click",
-                    heartRateMonitor.toggleMonitoring
-            );
-
-    document.documentElement.addEventListener("keyup", (event) => {
-      if (event.key === " ") {
-        heartRateMonitor.toggleMonitoring();
+    if(document.getElementById("flag").innerHTML === "2"){
+      let x = 0;
+      for (x in dataanterior){
+        if(dataanterior[x].spo2 != data[x].spo2){
+          console.log("Es diferente en id: ");
+          console.log(x);
+          break;
+        }
       }
-    });
+      document.getElementById("valorSP").value = data[x].spo2;
+      document.getElementById("valorID").value = x;
+      document.getElementById("vengoDE").value = 10;
+      document.getElementById("registrar").click();
+    }else{
+      document.getElementById("flag").innerHTML = "2";
+      console.log(document.getElementById("usuarioFirebase").innerHTML);
+    }
   });
 </script>
 </body>

@@ -2,11 +2,9 @@ package com.example.proyecto2.controller;
 
 import com.example.proyecto2.dto.MedicionDto;
 import com.example.proyecto2.entity.Medicion;
-import com.example.proyecto2.entity.Oximetro;
 import com.example.proyecto2.entity.Usuario;
 import com.example.proyecto2.repository.MedicionRepository;
 import com.example.proyecto2.repository.OximetroRepository;
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,8 +22,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/netpulse")
 public class MainController {
-
-    int IDglobal = 0;
 
     @Autowired
     MedicionRepository medicionRepository;
@@ -45,13 +41,13 @@ public class MainController {
         for(int i=0;i< pacientes.size();i++){
             model.addAttribute("Paciente"+(i+1),pacientes.get(i));
         }
-        return "monitoreo.html";
+        model.addAttribute("usuarioFirebase", usuario.getUsuario());
+        return "monitoreo";
     }
 
     @GetMapping("/graficoHistorico")
     public String graficoHistorico(HttpSession session, @RequestParam(name="valorID") Integer idoximetro, Model model){
 
-        IDglobal = idoximetro;
         Usuario sessionUser = (Usuario) session.getAttribute("usuarioLogueado");
         Integer idcliente = sessionUser.getIdcliente();
         int minimoIdOximetrosUsuario = oximetroRepository.menorIdOximetrosdelUsuario(idcliente);
@@ -59,31 +55,40 @@ public class MainController {
         int idoximetroCorrespondiente = (minimoIdOximetrosUsuario + idoximetro - 1);
         System.out.println(idoximetroCorrespondiente);
         List<MedicionDto> listaValoresSpo2yFechaPorIdOxi = medicionRepository.listaMedicionesyFechasPorIdOximetro(idoximetroCorrespondiente);
-        //List<Integer> listaMedicionesPorOximetro = medicionRepository.listaMedicionesPorIdOximetro(idoximetroCorrespondiente);
-        //List<Date> listaFecha = medicionRepository.listaFechaPorIdOximetro(idoximetroCorrespondiente);
         model.addAttribute("listaMediciones",listaValoresSpo2yFechaPorIdOxi);
+        model.addAttribute("usuarioFirebase", sessionUser.getUsuario());
+        model.addAttribute("IDOximetro", idoximetro);
         return "spo2/prueba";
 
     }
 
     @PostMapping("/registrarspo2")
     public String registrar(@RequestParam(name = "valorSP") Integer spo2obtenido, @RequestParam(name = "valorID") Integer idoximetro,
-                            @RequestParam(name = "vengoDE") Integer vengoDE) {
+                            @RequestParam(name = "vengoDE") Integer vengoDE,
+                            @RequestParam(name = "IDOximetro", required = false) Integer IDOximetro, HttpSession session) {
         Medicion medicion = new Medicion();
         LocalDateTime ahora = LocalDateTime.now();
         LocalTime.now();
         medicion.setFecha(ahora);
-        medicion.setIdoximetro(idoximetro);
+        Usuario usuariologueado = (Usuario) session.getAttribute("usuarioLogueado");
+        Integer idcliente = usuariologueado.getIdcliente();
+        int minimoIdOximetrosUsuario = oximetroRepository.menorIdOximetrosdelUsuario(idcliente);
+        System.out.println(minimoIdOximetrosUsuario);
+        int idoximetroCorrespondiente = (minimoIdOximetrosUsuario + idoximetro - 1);
+        System.out.println(idoximetroCorrespondiente);
+        medicion.setIdoximetro(idoximetroCorrespondiente);
         medicion.setValorspo2(spo2obtenido);
         medicionRepository.save(medicion);
+
         if(vengoDE == 10){
             return "redirect:/netpulse/monitoreospo2";
         }else if(vengoDE == 20){
-            return "redirect:/netpulse/graficoHistorico?valorID=" + IDglobal;
+            return "redirect:/netpulse/graficoHistorico?valorID=" + IDOximetro;
         }else{
             return "redirect:/netpulse/monitoreospo2";
         }
     }
+
     @GetMapping("/grafico")
     public String graficoGozu(Model model){
         List<Integer> listaMediciones = medicionRepository.listaMediciones();
@@ -92,4 +97,5 @@ public class MainController {
         model.addAttribute("listaFecha",listaFecha);
         return "grafico";
     }
+
 }
