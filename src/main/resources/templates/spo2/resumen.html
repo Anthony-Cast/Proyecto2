@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/indexfragment.html :: header( title = 'Monitoreo SpO2')">
+
+</head>
+
+<body class="clinic_version">
+<header>
+  <div th:replace="fragments/indexfragment.html :: navbar"></div>
+  <div th:replace="fragments/indexfragment.html :: navbar2"></div>
+</header>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyDxnoily8MtyE_EbrCrOatA0u0yOjf9yk4",
+    authDomain: "netpulse-9e137.firebaseapp.com",
+    databaseURL: "https://netpulse-9e137-default-rtdb.firebaseio.com",
+    projectId: "netpulse-9e137",
+    storageBucket: "netpulse-9e137.appspot.com",
+    messagingSenderId: "855387244557",
+    appId: "1:855387244557:web:ab3e1ccfbabebcc07d2d44"
+  };
+  firebase.initializeApp(firebaseConfig);
+</script>
+<div class="container" style="display: none">
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <div class="text-contant">
+        <form class="center" method="post" th:action="@{/netpulse/registrarspo2}">
+          <div class="row" id="aquiagregar">
+            <h2 class="row" style="color: #002752">Monitoreo %SpO2</h2>
+            <input class="form-control" style="display: none" type="text" id="valorSP" name="valorSP">
+            <input class="form-control" style="display: none" type="text" id="valorID" name="valorID">
+            <input class="form-control" style="display: none" type="text" id="vengoDE" name="vengoDE">
+            <input class="form-control" style="display: none" type="text" id="IDOximetro" name="IDOximetro" th:value="${IDOximetro}">
+          </div>
+          <h2 id="flag" style="display:none">0</h2>
+          <h2 id="usuarioFirebase" style="display:none" th:text="${usuarioFirebase}"></h2>
+          <button type="submit" style="display:none" id="registrar">Registrar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- end row -->
+</div>
+<div id="home" class="parallax first-section wow fadeIn">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <div class="text-contant">
+          <select id="valorspo2-lista" style="display: none">
+            <option th:each="spo2:${listaMediciones}"
+                    th:text="${spo2.getFechamedicion()}"
+                    th:value="${spo2.getValorspo2()}">
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container" style="width: 1400px; height: 700px">
+    <canvas id="myChart" width="1400px" height="700px"></canvas>
+  </div>
+</div>
+<div>
+
+</div>
+<script>
+  let myChart;
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var listaProm=document.getElementById("valorspo2-lista");
+  var dataFecha=[listaProm.length];
+  var dataSPO2=[listaProm.length];
+  for(var i=0;i<listaProm.length;i++){
+    dataFecha[i]=listaProm[i].text;
+    console.log(dataFecha[i]);
+    dataSPO2[i]=listaProm[i].value;
+    console.log(dataSPO2[i]);
+  }
+  myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: dataFecha,
+      datasets: [{
+        label: '%SpO2',
+        data: dataSPO2,
+        tension: 0.3,
+        backgroundColor: [
+          'rgb(50,151,196,1)',
+        ],
+        borderColor: [
+          'rgba(61,182,198,0.95)',
+        ],
+        borderWidth: 5
+      }]
+    },
+    options: {
+      scales: {
+        y: {}
+      }
+    }
+  });
+
+</script>
+<script>
+  var usuarioFire = 0;
+  usuarioFire = document.getElementById("usuarioFirebase").innerText;
+  var lecturaSPO2 = firebase.database().ref('Pulsioximetro/' + usuarioFire);
+  let data = 0;
+  lecturaSPO2.on('value', (snapshot) => {
+    let dataanterior = data;
+    data = snapshot.val();
+    if(document.getElementById("flag").innerHTML === "2"){
+      let x = 0;
+      for (x in dataanterior){
+        if(dataanterior[x].spo2 != data[x].spo2){
+          console.log("Es diferente en id: ");
+          console.log(x);
+          break;
+        }
+      }
+      document.getElementById("valorSP").value = data[x].spo2;
+      document.getElementById("valorID").value = x;
+      document.getElementById("vengoDE").value = 20;
+      document.getElementById("registrar").click();
+    }else{
+      document.getElementById("flag").innerHTML = "2";
+    }
+  });
+</script>
+<script>
+  $(document).ready(function(){
+    $("#idhome").removeClass();
+    $("#idspo2").addClass("active");
+  });
+</script>
+</body>
+</html>
