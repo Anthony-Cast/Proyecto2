@@ -52,7 +52,7 @@
         </option>
     </select>
     <select id="dias-lista">
-        <option value="logo">Elige tu opción</option>
+        <option value="default">Elige tu opción</option>
         <option th:each="dia:${listaDias}"
                 th:text="${dia}"
                 th:value="${dia}">
@@ -65,53 +65,12 @@
 
 <script>
     let myChart;
-    var lista=document.getElementById("dias-lista").value;
-    console.log(lista);
-    if(lista=="logo") {
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var listaMediciones = document.getElementById("valorspo2-lista");
-        let i = 0;
-        console.log(listaMediciones.length);
-        var dataSPO2 = [listaMediciones.length];
-        var dataFecha = [listaMediciones.length];
-        for (i; i < listaMediciones.length; i++) {
-            dataSPO2[i] = listaMediciones[i].value;
-            dataFecha[i] = listaMediciones[i].text;
-        }
-        //console.log(dataSPO2);
-        //console.log(dataFecha);
-        if (myChart) {
-            myChart.destroy();
-        }
-        myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: dataFecha,
-                datasets: [{
-                    label: '%SpO2',
-                    data: dataSPO2,
-                    tension: 0.3,
-                    backgroundColor: [
-                        'rgb(50,151,196,1)',
-                    ],
-                    borderColor: [
-                        'rgba(61,182,198,0.95)',
-                    ],
-                    borderWidth: 5
-                }]
-            },
-            options: {
-                scales: {
-                    y: {}
-                }
-            }
-        });
-    }
+
     $("#dias-lista").change(function (){
         var ctx = document.getElementById('myChart').getContext('2d');
         var diaelegido=document.getElementById("dias-lista").value;
         console.log(diaelegido);
-        if(diaelegido!="logo") {
+        if(diaelegido!="default") {
             var listaMediciones = document.getElementById("valorspo2-lista");
             console.log(listaMediciones.length);
             var dataSPO2 = [];
@@ -152,44 +111,10 @@
             });
         }
         else {
-            var ctx = document.getElementById('myChart').getContext('2d');
-            var listaMediciones = document.getElementById("valorspo2-lista");
-            var i = 0;
-            console.log(listaMediciones.length);
-            var dataSPO2 = [listaMediciones.length];
-            var dataFecha = [listaMediciones.length];
-            for (i; i < listaMediciones.length; i++) {
-                dataSPO2[i] = listaMediciones[i].value;
-                dataFecha[i] = listaMediciones[i].text;
-            }
-            //console.log(dataSPO2);
-            //console.log(dataFecha);
+
             if (myChart) {
                 myChart.destroy();
             }
-            myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: dataFecha,
-                    datasets: [{
-                        label: '%SpO2',
-                        data: dataSPO2,
-                        tension: 0.3,
-                        backgroundColor: [
-                            'rgb(50,151,196,1)',
-                        ],
-                        borderColor: [
-                            'rgba(61,182,198,0.95)',
-                        ],
-                        borderWidth: 5
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {}
-                    }
-                }
-            });
         }
     });
 
