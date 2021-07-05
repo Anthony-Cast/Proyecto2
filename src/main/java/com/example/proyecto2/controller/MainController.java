@@ -4,6 +4,7 @@ import com.example.proyecto2.dto.MedicionDto;
 import com.example.proyecto2.dto.OximetrosDTO;
 import com.example.proyecto2.dto.PacienteDTO;
 import com.example.proyecto2.entity.Medicion;
+import com.example.proyecto2.entity.Oximetro;
 import com.example.proyecto2.entity.Usuario;
 import com.example.proyecto2.repository.MedicionRepository;
 import com.example.proyecto2.repository.OximetroRepository;
@@ -11,16 +12,14 @@ import com.example.proyecto2.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/netpulse")
@@ -141,5 +140,18 @@ public class MainController {
         model.addAttribute("nombre",nombre);
         model.addAttribute("datosTabla",tablaInfo);
      return "tabla";
+    }
+    @GetMapping("/editar")
+    public String editar(Model model, @RequestParam("id") int id, @ModelAttribute("oximetro")Oximetro oximetro){
+        Optional<Oximetro> oximetroOptional = oximetroRepository.findById(id);
+        if(oximetroOptional.isPresent()){
+            oximetro=oximetroOptional.get();
+            model.addAttribute("oximetro",oximetro);
+            return "editar";
+        }
+        else{
+            model.addAttribute("mensaje","No hay pulsioxímetro asociado");
+            return "redirect:/netpulse/oximetros";
+        }
     }
 }
