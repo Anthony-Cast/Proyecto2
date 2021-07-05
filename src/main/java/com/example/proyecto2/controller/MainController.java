@@ -40,6 +40,7 @@ public class MainController {
         List<String> pacientes = oximetroRepository.buscarPacientes(usuario.getIdcliente());
         for(int i=0;i< pacientes.size();i++){
             model.addAttribute("Paciente"+(i+1),pacientes.get(i));
+            model.addAttribute("IDOxi"+(i+1), (i+1));
         }
         model.addAttribute("usuarioFirebase", usuario.getUsuario());
         return "monitoreo";
