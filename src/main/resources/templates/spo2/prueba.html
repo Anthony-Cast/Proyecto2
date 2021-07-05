@@ -57,6 +57,12 @@
                                 th:value="${spo2.getValorspo2()}">
                         </option>
                     </select>
+                    <select id="prom-dias" style="display: none">
+                        <option th:each="dias:${promDias}"
+                                th:text="${dias.getFechamedicion()}"
+                                th:value="${dias.getValorspo2()}">
+                        </option>
+                    </select>
                     <select id="dias-lista">
                         <option value="default">Elige tu opción</option>
                         <option th:each="dia:${listaDias}"
@@ -77,6 +83,39 @@
 </div>
 <script>
     let myChart;
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var listaProm=document.getElementById("prom-dias");
+    var dataFecha=[listaProm.length];
+    var dataSPO2=[listaProm.length];
+    for(var i=0;i<listaProm.length;i++){
+        dataFecha[i]=listaProm[i].text;
+        console.log(dataFecha[i]);
+        dataSPO2[i]=listaProm[i].value;
+        console.log(dataSPO2[i]);
+    }
+    myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: dataFecha,
+            datasets: [{
+                label: '%SpO2',
+                data: dataSPO2,
+                tension: 0.3,
+                backgroundColor: [
+                    'rgb(50,151,196,1)',
+                ],
+                borderColor: [
+                    'rgba(61,182,198,0.95)',
+                ],
+                borderWidth: 5
+            }]
+        },
+        options: {
+            scales: {
+                y: {}
+            }
+        }
+    });
     $("#dias-lista").change(function (){
         var ctx = document.getElementById('myChart').getContext('2d');
         var diaelegido=document.getElementById("dias-lista").value;
@@ -122,9 +161,41 @@
             });
         }
         else {
+            var listaProm = document.getElementById("prom-dias");
+            var dataFecha=[listaProm.length];
+            var dataSPO2=[listaProm.length];
+            for(var i=0;i<listaProm.length;i++){
+                dataFecha[i]=listaProm[i].text;
+                console.log(dataFecha[i]);
+                dataSPO2[i]=listaProm[i].value;
+                console.log(dataSPO2[i]);
+            }
             if (myChart) {
                 myChart.destroy();
             }
+            myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dataFecha,
+                    datasets: [{
+                        label: '%SpO2',
+                        data: dataSPO2,
+                        tension: 0.3,
+                        backgroundColor: [
+                            'rgb(50,151,196,1)',
+                        ],
+                        borderColor: [
+                            'rgba(61,182,198,0.95)',
+                        ],
+                        borderWidth: 5
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {}
+                    }
+                }
+            });
         }
     });
 
