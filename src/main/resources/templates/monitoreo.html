@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/indexfragment.html :: header( title = 'Monitoreo SpO2')"></head>
 <style>
   :root {
@@ -112,6 +113,11 @@
           <ul class="nav navbar-nav">
             <li><a data-scroll="" th:href="@{/netpulse}">Home</a></li>
             <li><a class="active" data-scroll th:href="@{/netpulse/monitoreospo2}">SPO2 </a></li>
+            <li sec:authorize="isAuthenticated()"><a>Cerrar sesion
+              <form style="opacity: 0" th:action="@{/logout}" method="post">
+                <button style="height: 50px;position: absolute;transform: translateY(-40px)" type="submit" >Cerrar Sesión</button>
+              </form></a>
+            </li>
           </ul>
         </div>
       </nav>
