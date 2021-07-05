@@ -119,8 +119,8 @@
         <div class="bpm-display">
           <output id="valor1spo2" class="bpm-value" title="Heart rate">00</output>
           <label style="transform: translateY(-60px)">%SpO2</label>
-          <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente1}"></b></p>
-          <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
+          <p style="transform: translateY(-30px)"><b id="elementBpaciente1" style="color: black;font-size: 20px" th:text="${Paciente1}"></b></p>
+          <a style="transform: translateY(-30px)" th:href="@{'/netpulse/graficoHistorico?valorID=' + ${IDOxi1}}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
         </div>
       </div>
 
@@ -128,8 +128,8 @@
         <div class="bpm-display">
           <output id="valor2spo2" class="bpm-value" title="Heart rate">00</output>
           <label style="transform: translateY(-60px)">%SpO2</label>
-          <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente2}"></b></p>
-          <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
+          <p style="transform: translateY(-30px)"><b id="elementBpaciente2" style="color: black;font-size: 20px" th:text="${Paciente2}"></b></p>
+          <a style="transform: translateY(-30px)" th:href="@{'/netpulse/graficoHistorico?valorID=' + ${IDOxi2}}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
         </div>
       </div>
 
@@ -137,8 +137,8 @@
         <div class="bpm-display">
           <output id="valor3spo2" class="bpm-value" title="Heart rate">00</output>
           <label style="transform: translateY(-60px)">%SpO2</label>
-          <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente3}"></b></p>
-          <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
+          <p style="transform: translateY(-30px)"><b id="elementBpaciente3" style="color: black;font-size: 20px" th:text="${Paciente3}"></b></p>
+          <a style="transform: translateY(-30px)" th:href="@{'/netpulse/graficoHistorico?valorID=' + ${IDOxi3}}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
         </div>
       </div>
 
@@ -146,8 +146,8 @@
         <div class="bpm-display">
           <output id="valor4spo2" class="bpm-value" title="Heart rate">00</output>
           <label style="transform: translateY(-60px)">%SpO2</label>
-          <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente4}"></b></p>
-          <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
+          <p style="transform: translateY(-30px)"><b id="elementBpaciente4" style="color: black;font-size: 20px" th:text="${Paciente4}"></b></p>
+          <a style="transform: translateY(-30px)" th:href="@{'/netpulse/graficoHistorico?valorID=' + ${IDOxi4}}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
         </div>
       </div>
 
@@ -155,8 +155,8 @@
         <div class="bpm-display">
           <output id="valor5spo2" class="bpm-value" title="Heart rate">00</output>
           <label style="transform: translateY(-60px)">%SpO2</label>
-          <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente5}"></b></p>
-          <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
+          <p style="transform: translateY(-30px)"><b id="elementBpaciente5" style="color: black;font-size: 20px" th:text="${Paciente5}"></b></p>
+          <a style="transform: translateY(-30px)" th:href="@{'/netpulse/graficoHistorico?valorID=' + ${IDOxi5}}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
         </div>
       </div>
 
@@ -164,8 +164,8 @@
         <div class="bpm-display">
           <output id="valor6spo2" class="bpm-value" title="Heart rate">00</output>
           <label style="transform: translateY(-60px)">%SpO2</label>
-          <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente6}"></b></p>
-          <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
+          <p style="transform: translateY(-30px)"><b id="elementBpaciente6" style="color: black;font-size: 20px" th:text="${Paciente6}"></b></p>
+          <a style="transform: translateY(-30px)" th:href="@{'/netpulse/graficoHistorico?valorID=' + ${IDOxi6}}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
         </div>
       </div>
 
@@ -173,8 +173,8 @@
         <div class="bpm-display">
           <output id="valor7spo2" class="bpm-value" title="Heart rate">00</output>
           <label style="transform: translateY(-60px)">%SpO2</label>
-          <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente7}"></b></p>
-          <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
+          <p style="transform: translateY(-30px)"><b id="elementBpaciente7" style="color: black;font-size: 20px" th:text="${Paciente7}"></b></p>
+          <a style="transform: translateY(-30px)" th:href="@{'/netpulse/graficoHistorico?valorID=' + ${IDOxi7}}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
         </div>
       </div>
 
@@ -182,8 +182,8 @@
         <div class="bpm-display">
           <output id="valor8spo2" class="bpm-value" title="Heart rate">00</output>
           <label style="transform: translateY(-60px)">%SpO2</label>
-          <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente8}"></b></p>
-          <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
+          <p style="transform: translateY(-30px)"><b id="elementBpaciente8" style="color: black;font-size: 20px" th:text="${Paciente8}"></b></p>
+          <a style="transform: translateY(-30px)" th:href="@{'/netpulse/graficoHistorico?valorID=' + ${IDOxi8}}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
         </div>
       </div>
 
@@ -191,8 +191,8 @@
         <div class="bpm-display">
           <output id="valor9spo2" class="bpm-value" title="Heart rate">00</output>
           <label style="transform: translateY(-60px)">%SpO2</label>
-          <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente9}"></b></p>
-          <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
+          <p style="transform: translateY(-30px)"><b id="elementBpaciente9" style="color: black;font-size: 20px" th:text="${Paciente9}"></b></p>
+          <a style="transform: translateY(-30px)" th:href="@{'/netpulse/graficoHistorico?valorID=' + ${IDOxi9}}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
         </div>
       </div>
 
@@ -200,11 +200,11 @@
         <div class="bpm-display">
           <output id="valor10spo2" class="bpm-value" title="Heart rate">00</output>
           <label style="transform: translateY(-60px)">%SpO2</label>
-          <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente10}"></b></p>
-          <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
+          <p style="transform: translateY(-30px)"><b id="elementBpaciente10" style="color: black;font-size: 20px" th:text="${Paciente10}"></b></p>
+          <a style="transform: translateY(-30px)" th:href="@{'/netpulse/graficoHistorico?valorID=' + ${IDOxi10}}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
         </div>
       </div>
-
+      <input id="dataLongitud" type="text" style="display:none">
     </div>
   </div>
 </div>
@@ -239,11 +239,25 @@
       document.getElementById("vengoDE").value = 10;
       document.getElementById("registrar").click();
     }else{
+      document.getElementById("dataLongitud").value = data.length;
       document.getElementById("flag").innerHTML = "2";
       console.log(document.getElementById("usuarioFirebase").innerHTML);
+
+      let ii = 1;
+      let longi = 0;
+      longi = document.getElementById("dataLongitud").value;
+      console.log(longi);
+      for (ii; ii<longi;ii++) {
+        if (document.getElementById("elementBpaciente" + ii).innerText === "") {
+          document.getElementById("display" + ii).style.display = 'none';
+          console.log("Limpiando display: ");
+          console.log(ii);
+        }
+      }
     }
   });
 </script>
+
 </body>
 
 </html>

@@ -47,6 +47,8 @@ public class MainController {
             else{
                 model.addAttribute("Paciente" + (i + 1), "");
             }
+            model.addAttribute("Paciente"+(i+1),pacientes.get(i));
+            model.addAttribute("IDOxi"+(i+1), (i+1));
         }
         model.addAttribute("usuarioFirebase", usuario.getUsuario());
         return "monitoreo";
