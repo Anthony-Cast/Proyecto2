@@ -78,11 +78,11 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a class="active" data-scroll id="idhome" th:href="@{/netpulse}">Home</a></li>
-            <li><a data-scroll id="idaboutus" th:href="@{'/netpulse#about'}">About us</a></li>
-            <li><a data-scroll id="idservices" th:href="@{'/netpulse#service'}">Services</a></li>
-            <li><a data-scroll id="iddoctors" th:href="@{'/netpulse#doctors'}">Doctors</a></li>
-            <li><a data-scroll id="idcontact" th:href="@{'/netpulse#getintouch'}">Contact</a></li>
-            <li><a data-scroll id="idspo2" th:href="@{/netpulse/monitoreospo2}">SPO2 </a></li>
+            <li><a data-scroll id="idaboutus" th:href="@{'/netpulse#about'}">Nosotros</a></li>
+            <li><a data-scroll id="idservices" th:href="@{'/netpulse#service'}">Servicios</a></li>
+            <li><a data-scroll id="iddoctors" th:href="@{'/netpulse#doctors'}">Equipo</a></li>
+            <li><a data-scroll id="idcontact" th:href="@{'/netpulse#getintouch'}">Contáctanos</a></li>
+            <li><a data-scroll id="idspo2" th:href="@{/netpulse/monitoreospo2}">Monitoreo SPO2</a></li>
             <li sec:authorize="isAuthenticated()"><a>Cerrar sesion
               <form style="opacity: 0" th:action="@{/logout}" method="post">
               <button style="height: 50px;position: absolute;transform: translateY(-40px)" type="submit" >Cerrar Sesión</button>
