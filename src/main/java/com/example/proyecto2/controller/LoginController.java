@@ -40,7 +40,7 @@ public class LoginController {
         //System.out.println(formatDateTime);*/
 
         if (rol.equals("admin")){
-            return "redirect:/netpulse";
+            return "redirect:/netpulse/monitoreospo2";
         }else{
             System.out.println(rol);
             return "/login";

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+import java.util.List;
+
 @Repository
 public interface OximetroRepository extends JpaRepository<Oximetro,Integer> {
 
@@ -15,4 +17,7 @@ public interface OximetroRepository extends JpaRepository<Oximetro,Integer> {
 
     @Query(value="select min(idoximetro) from netpulse.oximetros where usuarios_idcliente = ?1", nativeQuery = true)
     Integer menorIdOximetrosdelUsuario (int idcliente);
+    @Query(value="select paciente from oximetros where activo=1 and usuarios_idcliente=?1",nativeQuery = true)
+    List<String> buscarPacientes(int id);
+
 }

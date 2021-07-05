@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/indexfragment.html :: header( title = 'Monitoreo SpO2')"></head>
 <style>
   :root {
@@ -80,6 +81,50 @@
   });
 </script>
 
+<header>
+  <div class="header-top wow fadeIn">
+    <div class="container">
+      <a class="navbar-brand" th:href="@{/netpulse/}"><img src="/images/netpulselogo.png" alt=#></a>
+      <div class="right-header">
+        <div class="header-info">
+          <div class="info-inner">
+            <span class="icontop"><img src="/images/phone-icon.png" alt="#"></span>
+            <span class="iconcont"><a href="tel:800 123 456">800 123 456</a></span>
+          </div>
+          <div class="info-inner">
+            <span class="icontop"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+            <span class="iconcont"><a data-scroll href="mailto:info@yoursite.com">info@Lifecare.com</a></span>
+          </div>
+          <div class="info-inner">
+            <span class="icontop"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+            <span class="iconcont"><a data-scroll href="#">Daily: 7:00am - 8:00pm</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="header-bottom wow fadeIn">
+    <div class="container">
+      <nav class="main-menu">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i class="fa fa-bars" aria-hidden="true"></i></button>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a data-scroll="" th:href="@{/netpulse}">Home</a></li>
+            <li><a class="active" data-scroll th:href="@{/netpulse/monitoreospo2}">SPO2 </a></li>
+            <li sec:authorize="isAuthenticated()"><a>Cerrar sesion
+              <form style="opacity: 0" th:action="@{/logout}" method="post">
+                <button style="height: 50px;position: absolute;transform: translateY(-40px)" type="submit" >Cerrar Sesión</button>
+              </form></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
 
 <div id="home" class="parallax first-section wow fadeIn">
   <div class="container">
@@ -110,42 +155,54 @@
           <div class="bpm-display">
             <output id="valor1spo2" class="bpm-value" title="Heart rate">00</output>
             <label style="transform: translateY(-60px)">%SpO2</label>
+            <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente1}"></b></p>
             <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
+
           </div>
         </div>
         <div class="bpm-display-container" id="display2" style="display: none">
           <div class="bpm-display">
             <output id="valor2spo2" class="bpm-value" title="Heart rate">00</output>
             <label style="transform: translateY(-60px)">%SpO2</label>
+            <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente2}"></b></p>
             <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
+
           </div>
         </div>
       <div class="bpm-display-container" id="display3" style="display: none">
         <div class="bpm-display">
           <output id="valor3spo2" class="bpm-value" title="Heart rate">00</output>
           <label style="transform: translateY(-60px)">%SpO2</label>
+          <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente3}"></b></p>
           <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
+
         </div>
       </div>
       <div class="bpm-display-container" id="display4" style="display: none">
         <div class="bpm-display">
           <output id="valor4spo2" class="bpm-value" title="Heart rate">00</output>
           <label style="transform: translateY(-60px)">%SpO2</label>
+          <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente4}"></b></p>
           <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
+
         </div>
       </div>
       <div class="bpm-display-container" id="display5" style="display: none">
         <div class="bpm-display">
           <output id="valor5spo2" class="bpm-value" title="Heart rate">00</output>
           <label style="transform: translateY(-60px)">%SpO2</label>
+          <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente5}"></b></p>
           <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
+
         </div>
       </div>
       <div class="bpm-display-container" id="display6" style="display: none">
         <div class="bpm-display">
           <output id="valor6spo2" class="bpm-value" title="Heart rate">00</output>
           <label style="transform: translateY(-60px)">%SpO2</label>
+          <p style="transform: translateY(-30px)"><b style="color: black;font-size: 20px" th:text="${Paciente6}"></b></p>
           <a style="transform: translateY(-30px)" th:href="@{/netpulse/grafico}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
+
         </div>
       </div>
     </div>

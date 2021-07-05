@@ -29,7 +29,6 @@ public class MainController {
 
     @Autowired
     MedicionRepository medicionRepository;
-
     @Autowired
     OximetroRepository oximetroRepository;
 
@@ -40,9 +39,13 @@ public class MainController {
     }
 
     @GetMapping("/monitoreospo2")
-    public String monitoreo(){
-
-        return "monitoreo";
+    public String monitoreo(Model model,HttpSession session){
+        Usuario usuario=(Usuario) session.getAttribute("usuarioLogueado");
+        List<String> pacientes = oximetroRepository.buscarPacientes(usuario.getIdcliente());
+        for(int i=0;i< pacientes.size();i++){
+            model.addAttribute("Paciente"+(i+1),pacientes.get(i));
+        }
+        return "monitoreo.html";
     }
 
     @GetMapping("/graficoHistorico")
