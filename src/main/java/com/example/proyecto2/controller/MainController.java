@@ -1,7 +1,10 @@
 package com.example.proyecto2.controller;
 
 import com.example.proyecto2.entity.Medicion;
+import com.example.proyecto2.entity.Oximetro;
+import com.example.proyecto2.entity.Usuario;
 import com.example.proyecto2.repository.MedicionRepository;
+import com.example.proyecto2.repository.OximetroRepository;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
@@ -22,6 +26,8 @@ public class MainController {
 
     @Autowired
     MedicionRepository medicionRepository;
+    @Autowired
+    OximetroRepository oximetroRepository;
 
     @GetMapping("")
     public String bienvenida(){
@@ -30,8 +36,12 @@ public class MainController {
     }
 
     @GetMapping("/monitoreospo2")
-    public String monitoreo(){
-
+    public String monitoreo(Model model,HttpSession session){
+        Usuario usuario=(Usuario) session.getAttribute("usuarioLogueado");
+        List<String> pacientes = oximetroRepository.buscarPacientes(usuario.getIdcliente());
+        for(int i=0;i< pacientes.size();i++){
+            model.addAttribute("Paciente"+(i+1),pacientes.get(i));
+        }
         return "monitoreo.html";
     }
 
