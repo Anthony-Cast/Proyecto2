@@ -1265,9 +1265,10 @@ body.clinic_version .desc {
     padding: 0;
 }
 .typewrite {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 500;
-	margin-top:0;
+	margin-top:20px;
+    margin-bottom:20px;
 }
 .service-time {
     padding: 25px 20px 35px;
