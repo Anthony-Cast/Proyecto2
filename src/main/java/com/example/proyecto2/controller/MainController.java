@@ -75,6 +75,24 @@ public class MainController {
 
     }
 
+    @GetMapping("/resumenHistorico")
+    public String resumenHistorico(HttpSession session, @RequestParam(name="valorID") Integer idoximetro, Model model){
+
+        Usuario sessionUser = (Usuario) session.getAttribute("usuarioLogueado");
+        Integer idcliente = sessionUser.getIdcliente();
+        int minimoIdOximetrosUsuario = oximetroRepository.menorIdOximetrosdelUsuario(idcliente);
+        System.out.println(minimoIdOximetrosUsuario);
+        int idoximetroCorrespondiente = (minimoIdOximetrosUsuario + idoximetro - 1);
+
+        List<MedicionDto> listaValoresSpo2yFechaPorIdOxi = medicionRepository.valoresUltimos(idoximetroCorrespondiente);
+        model.addAttribute("listaMediciones",listaValoresSpo2yFechaPorIdOxi);
+        model.addAttribute("usuarioFirebase", sessionUser.getUsuario());
+        model.addAttribute("IDOximetro", idoximetro);
+        model.addAttribute("nombre",oximetroRepository.findById(idoximetroCorrespondiente).get().getPaciente());
+        return "spo2/resumen";
+
+    }
+
     @PostMapping("/registrarspo2")
     public String registrar(@RequestParam(name = "valorSP") Integer spo2obtenido, @RequestParam(name = "valorID") Integer idoximetro,
                             @RequestParam(name = "vengoDE") Integer vengoDE,

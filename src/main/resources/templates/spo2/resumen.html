@@ -61,6 +61,9 @@
       </div>
     </div>
   </div>
+  <p style="font-size: 30px;text-align: center;margin-bottom: 20px">Evolución de los valores SPO2% del paciente: <br> <b><span style="font-size: 30px;text-align: center" th:text="${nombre}"></span></b></p>
+  <a style="transform: translateX(550px);margin-bottom: 20px" th:href="@{'/netpulse/graficoHistorico?valorID=' + ${IDOximetro}}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Mas detalles</a>
+  <br>
   <div class="container" style="width: 1400px; height: 700px">
     <canvas id="myChart" width="1400px" height="700px"></canvas>
   </div>
