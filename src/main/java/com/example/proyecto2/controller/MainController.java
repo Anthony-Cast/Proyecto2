@@ -1,6 +1,7 @@
 package com.example.proyecto2.controller;
 
 import com.example.proyecto2.entity.Medicion;
+import com.example.proyecto2.entity.Usuario;
 import com.example.proyecto2.repository.MedicionRepository;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
@@ -37,7 +39,14 @@ public class MainController {
     }
 
     @GetMapping("/prueba")
-    public String prueba(){
+    public String prueba(HttpSession session, @RequestParam(name="valorID") Integer idoximetro){
+
+        /**Se obtiene Id de Restaurante**/
+        Usuario sessionUser = (Usuario) session.getAttribute("usuarioLogueado");
+        Integer idusuario = sessionUser.getIdcliente();
+        //Integer idoximetro=restauranteRepository.buscarRestaurantePorIdAdmin(sessionUser.getIdusuarios()).get().getIdrestaurante();
+        /********************************/
+
         return "bpm.html";
 
     }
