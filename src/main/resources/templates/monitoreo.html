@@ -18,7 +18,7 @@
     --page-color: #ddd;
     --text-color-muted: #000000;
     --graph-background: transparent;
-    --graph-color: #1198c1;
+    --graph-color: #169eb4;
     --backdrop-background: rgba(10, 4, 4, 0.95);
     --nav-item-background: #fdfafa;
   }
@@ -76,7 +76,7 @@
 
       <div class="bpm-display-container" id="display1" style="display: none">
         <div class="bpm-display">
-          <output id="valor1spo2" class="bpm-value" title="Heart rate">00</output>
+          <output id="valor1spo2" class="bpm-value" title="Heart rate" style="color: #ac2925">00</output>
           <label style="transform: translateY(-60px)">%SpO2</label>
           <p style="transform: translateY(-30px)"><b id="elementBpaciente1" style="color: black;font-size: 20px" th:text="${Paciente1}"></b></p>
           <a style="transform: translateY(-30px)" th:href="@{'/netpulse/resumenHistorico?valorID=' + ${IDOxi1}}" data-scroll="" class="btn btn-light btn-radius btn-brd grd1 effect-1">Detalles del paciente</a>
@@ -183,6 +183,12 @@
     for (i in data) {
       document.getElementById("display" + i).style.display = 'inline-block';
       document.getElementById("valor" + i + "spo2").value = data[i].spo2;
+      if(data[i].spo2 < 95){
+        document.getElementById("valor" + i + "spo2").style.color = "red";
+      }else{
+        document.getElementById("valor" + i + "spo2").style.color = "black";
+      }
+
     }
     if(document.getElementById("flag").innerHTML === "2"){
       let x = 0;
