@@ -70,7 +70,7 @@ public class MainController {
         model.addAttribute("IDOximetro", idoximetro);
         model.addAttribute("listaDias",listDias);
         model.addAttribute("promDias",promDias);
-        return "spo2/prueba";
+        return "spo2/grafica";
 
     }
 
