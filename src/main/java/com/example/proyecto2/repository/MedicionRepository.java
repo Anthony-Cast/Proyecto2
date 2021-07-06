@@ -38,10 +38,7 @@ public interface MedicionRepository extends JpaRepository<Medicion,Integer> {
             "where idoximetro=?1\n" +
             "group by date(fecha)",nativeQuery = true)
     List<MedicionDto> valoresMensuales(int id);
-    @Query(value="select fecha as fechamedicion,valorspo2 as valorspo2 from mediciones\n" +
-            "where idoximetro=?1\n" +
-            "order by fecha asc\n" +
-            "limit 15",nativeQuery = true)
+    @Query(value="SELECT * FROM (SELECT fecha as fechamedicion,valorspo2 as valorspo2 from mediciones where idoximetro = ?1 ORDER BY fecha DESC LIMIT 15) sub ORDER BY fechamedicion ASC",nativeQuery = true)
     List<MedicionDto> valoresUltimos(int id);
 
 
