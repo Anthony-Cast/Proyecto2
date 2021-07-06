@@ -117,7 +117,7 @@ public class MainController {
         if(vengoDE == 10){
             return "redirect:/netpulse/monitoreospo2";
         }else if(vengoDE == 20){
-            return "redirect:/netpulse/graficoHistorico?valorID=" + IDOximetro;
+            return "redirect:/netpulse/resumenHistorico?valorID=" + IDOximetro;
         }else{
             return "redirect:/netpulse/monitoreospo2";
         }
