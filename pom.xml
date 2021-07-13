@@ -122,7 +122,6 @@
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-jdbc</artifactId>
         </dependency>
-
         <!--dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
